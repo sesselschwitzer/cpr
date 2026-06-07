@@ -40,896 +40,330 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    img { display: block; max-width: 100%; }
+    img { display: block; max-width: 100%; object-fit: cover; }
     a { color: inherit; text-decoration: none; }
     button { cursor: pointer; font-family: inherit; }
 
     /* ── Typography ───────────────────────────────── */
-    .serif { font-family: 'Playfair Display', serif; }
     h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
     h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; }
     h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; }
-    h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; }
     p  { font-size: 1rem; color: var(--text-mid); max-width: 65ch; }
 
-    /* ── Layout helpers ───────────────────────────── */
+    /* ── Layout ───────────────────────────────────── */
     .container { width: 92%; max-width: 1200px; margin: 0 auto; }
     .section    { padding: 96px 0; }
-    .section--alt { background: var(--warm-white); }
-    .section--dark {
-      background: var(--green-dark);
-      color: var(--cream);
-    }
+    .section--alt  { background: var(--warm-white); }
+    .section--dark { background: var(--green-dark); color: var(--cream); }
     .section--dark p { color: var(--green-pale); }
     .label {
       display: inline-block;
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 14px;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
     }
     .label--light { color: var(--gold-light); }
-    .divider {
-      width: 48px; height: 3px;
-      background: var(--gold);
-      border-radius: 2px;
-      margin: 20px 0 32px;
-    }
-    .divider--center { margin: 20px auto 32px; }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
+    .divider { width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin: 18px 0 30px; }
+    .divider--center { margin: 18px auto 30px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .text-center { text-align: center; }
     .text-center p { margin: 0 auto; }
-    .flex-center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
+    /* ── Buttons ──────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 30px; border-radius: 100px;
+      font-size: .9375rem; font-weight: 600;
+      transition: all var(--transition); border: 2px solid transparent;
     }
+    .btn--primary { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .btn--primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,145,42,.35); }
+    .btn--outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+    .btn--outline:hover { background: rgba(255,255,255,.1); border-color: #fff; transform: translateY(-2px); }
+    .btn--outline-dark { background: transparent; color: var(--green-dark); border-color: var(--green-mid); }
+    .btn--outline-dark:hover { background: var(--green-dark); color: #fff; transform: translateY(-2px); }
 
     /* ── Navigation ───────────────────────────────── */
     .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 0;
-      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background var(--transition), box-shadow var(--transition);
     }
     .nav.scrolled {
       background: rgba(250,247,242,.97);
       backdrop-filter: blur(12px);
       box-shadow: 0 2px 20px rgba(30,39,32,.08);
-      padding: 0;
     }
     .nav__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 76px;
-      width: 92%;
-      max-width: 1200px;
-      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px; width: 92%; max-width: 1200px; margin: 0 auto;
     }
-    .nav__logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .nav__logo-main {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--cream);
-      transition: color var(--transition);
-    }
+    .nav__logo { display: flex; flex-direction: column; line-height: 1; }
+    .nav__logo-main { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--cream); transition: color var(--transition); }
     .nav.scrolled .nav__logo-main { color: var(--green-dark); }
-    .nav__logo-sub {
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-top: 2px;
-    }
+    .nav__logo-sub { font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-light); margin-top: 2px; }
     .nav.scrolled .nav__logo-sub { color: var(--gold); }
-    .nav__links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav__links a {
-      font-size: .875rem;
-      font-weight: 500;
-      color: rgba(255,255,255,.9);
-      letter-spacing: .04em;
-      transition: color var(--transition);
-      position: relative;
-    }
-    .nav__links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px; left: 0;
-      width: 0; height: 2px;
-      background: var(--gold-light);
-      border-radius: 1px;
-      transition: width var(--transition);
-    }
+    .nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav__links a { font-size: .875rem; font-weight: 500; color: rgba(255,255,255,.9); letter-spacing: .03em; transition: color var(--transition); position: relative; }
+    .nav__links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--gold-light); border-radius: 1px; transition: width var(--transition); }
     .nav__links a:hover::after { width: 100%; }
     .nav.scrolled .nav__links a { color: var(--text-mid); }
     .nav.scrolled .nav__links a::after { background: var(--gold); }
-    .nav__cta {
-      padding: 9px 22px;
-      border-radius: 100px;
-      font-size: .875rem;
-      font-weight: 600;
-      background: var(--gold);
-      color: #fff;
-      border: none;
-      transition: background var(--transition), transform var(--transition);
-    }
+    .nav__cta { padding: 9px 22px; border-radius: 100px; font-size: .875rem; font-weight: 600; background: var(--gold); color: #fff; border: none; transition: all var(--transition); }
     .nav__cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .nav__burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .nav__burger span {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--cream);
-      border-radius: 1px;
-      transition: all var(--transition);
-    }
+    .nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; }
+    .nav__burger span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 1px; transition: all var(--transition); }
     .nav.scrolled .nav__burger span { background: var(--green-dark); }
 
-    /* ── Hero ─────────────────────────────────────── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
+    /* Mobile menu */
+    .nav__mobile {
+      display: none; flex-direction: column; gap: 0;
+      position: absolute; top: 76px; left: 0; right: 0;
+      background: var(--cream); box-shadow: 0 8px 32px rgba(0,0,0,.1);
+      padding: 8px 7% 20px;
     }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a { padding: 12px 0; font-size: .95rem; font-weight: 500; color: var(--text-mid); border-bottom: 1px solid var(--brown-light); }
+    .nav__mobile a:last-child { border: none; }
+    .nav__mobile .nav__cta { margin-top: 12px; text-align: center; border: 2px solid var(--gold); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
     .hero__bg {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
-        linear-gradient(165deg, rgba(30,40,28,.72) 0%, rgba(43,61,40,.55) 50%, rgba(20,28,18,.75) 100%),
+        linear-gradient(165deg, rgba(27,37,25,.76) 0%, rgba(43,61,40,.55) 50%, rgba(18,26,16,.78) 100%),
         url('https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=1800&q=80') center/cover no-repeat;
     }
-    .hero__content {
-      position: relative;
-      z-index: 1;
-      width: 92%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 76px;
-    }
+    .hero__content { position: relative; z-index: 1; width: 92%; max-width: 1200px; margin: 0 auto; padding-top: 76px; }
     .hero__eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold-light); margin-bottom: 22px;
     }
-    .hero__eyebrow::before {
-      content: '';
-      display: block;
-      width: 32px; height: 2px;
-      background: var(--gold-light);
-      border-radius: 1px;
-    }
-    .hero__title {
-      color: #fff;
-      max-width: 680px;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-    .hero__title em {
-      font-style: normal;
-      color: var(--gold-light);
-    }
-    .hero__subtitle {
-      font-size: 1.125rem;
-      color: rgba(255,255,255,.8);
-      max-width: 520px;
-      margin-bottom: 48px;
-      font-weight: 300;
-    }
-    .hero__actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      border-radius: 100px;
-      font-size: .9375rem;
-      font-weight: 600;
-      transition: all var(--transition);
-      border: 2px solid transparent;
-    }
-    .btn--primary {
-      background: var(--gold);
-      color: #fff;
-      border-color: var(--gold);
-    }
-    .btn--primary:hover {
-      background: var(--gold-light);
-      border-color: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(184,145,42,.35);
-    }
-    .btn--outline {
-      background: transparent;
-      color: #fff;
-      border-color: rgba(255,255,255,.5);
-    }
-    .btn--outline:hover {
-      background: rgba(255,255,255,.1);
-      border-color: #fff;
-      transform: translateY(-2px);
-    }
-    .btn--outline-dark {
-      background: transparent;
-      color: var(--green-dark);
-      border-color: var(--green-mid);
-    }
-    .btn--outline-dark:hover {
-      background: var(--green-dark);
-      color: #fff;
-      transform: translateY(-2px);
-    }
+    .hero__eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--gold-light); border-radius: 1px; }
+    .hero__title { color: #fff; max-width: 680px; margin-bottom: 22px; font-style: italic; }
+    .hero__title em { font-style: normal; color: var(--gold-light); }
+    .hero__subtitle { font-size: 1.1rem; color: rgba(255,255,255,.8); max-width: 520px; margin-bottom: 44px; font-weight: 300; }
+    .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
     .hero__scroll {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,.6);
-      font-size: .75rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      animation: bounce 2s infinite;
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.6); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      animation: bounce 2.2s infinite;
     }
     .hero__scroll svg { width: 20px; height: 20px; }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(8px); }
-    }
-    .hero__badge {
-      position: absolute;
-      bottom: 56px;
-      right: 7%;
-      background: rgba(255,255,255,.12);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: var(--radius-md);
-      padding: 20px 24px;
-      color: #fff;
-      text-align: center;
-      min-width: 160px;
-    }
-    .hero__badge-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1;
-      color: var(--gold-light);
-    }
-    .hero__badge-text {
-      font-size: .75rem;
-      font-weight: 500;
-      letter-spacing: .08em;
-      color: rgba(255,255,255,.8);
-      margin-top: 4px;
-    }
-
-    /* ── Trust bar ────────────────────────────────── */
-    .trust-bar {
-      background: var(--green-dark);
-      padding: 20px 0;
-    }
-    .trust-bar__inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255,255,255,.8);
-      font-size: .8125rem;
-      font-weight: 500;
-      letter-spacing: .04em;
-    }
-    .trust-item svg { flex-shrink: 0; color: var(--gold-light); }
-
-    /* ── Story section ────────────────────────────── */
-    .story__image-wrap {
-      position: relative;
-    }
-    .story__image {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      border-radius: var(--radius-lg);
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+    .hero__stats {
+      position: absolute; bottom: 56px; right: 7%;
+      display: flex; gap: 2px; border-radius: var(--radius-md); overflow: hidden;
       box-shadow: var(--shadow-lg);
     }
-    .story__image-card {
-      position: absolute;
-      bottom: -24px;
-      right: -24px;
-      background: var(--green-dark);
-      color: #fff;
-      border-radius: var(--radius-md);
-      padding: 24px 28px;
-      box-shadow: var(--shadow-md);
-      min-width: 200px;
+    .hero__stat {
+      background: rgba(255,255,255,.12); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.18); padding: 20px 26px; text-align: center; color: #fff;
     }
-    .story__image-card-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--gold-light);
-      line-height: 1;
+    .hero__stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold-light); line-height: 1; }
+    .hero__stat-text { font-size: .7rem; color: rgba(255,255,255,.75); margin-top: 4px; font-weight: 500; letter-spacing: .05em; }
+
+    /* ── Trust bar ────────────────────────────────── */
+    .trust-bar { background: var(--green-dark); padding: 20px 0; }
+    .trust-bar__inner { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.8); font-size: .8rem; font-weight: 500; letter-spacing: .04em; }
+    .trust-item svg { flex-shrink: 0; color: var(--gold-light); }
+
+    /* ── Story ────────────────────────────────────── */
+    .story__image-wrap { position: relative; }
+    .story__image { width: 100%; aspect-ratio: 4/5; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+    .story__overlay-card {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--green-dark); color: #fff;
+      border-radius: var(--radius-md); padding: 22px 26px; box-shadow: var(--shadow-md); min-width: 190px;
     }
-    .story__image-card-text {
-      font-size: .8125rem;
-      color: var(--green-pale);
-      margin-top: 4px;
-    }
+    .story__overlay-card-num { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: var(--gold-light); line-height: 1; }
+    .story__overlay-card-text { font-size: .78rem; color: var(--green-pale); margin-top: 4px; }
     .story__text { padding-left: 16px; }
-    .story__quote {
-      margin: 32px 0;
-      padding-left: 20px;
-      border-left: 3px solid var(--gold);
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.2rem;
-      color: var(--text-mid);
-      line-height: 1.6;
-    }
-    .story__facts {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 40px;
-    }
-    .fact {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .fact__icon {
-      width: 40px; height: 40px;
-      border-radius: var(--radius-sm);
-      background: var(--green-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--green-mid);
-    }
-    .fact__label { font-size: .75rem; color: var(--text-light); font-weight: 500; }
-    .fact__value { font-size: .9375rem; font-weight: 600; color: var(--text-dark); margin-top: 2px; }
+    .story__quote { margin: 28px 0; padding-left: 20px; border-left: 3px solid var(--gold); font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; color: var(--text-mid); line-height: 1.65; }
+    .story__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+    .fact { display: flex; align-items: flex-start; gap: 12px; }
+    .fact__icon { width: 38px; height: 38px; border-radius: var(--radius-sm); background: var(--green-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--green-mid); }
+    .fact__label { font-size: .72rem; color: var(--text-light); font-weight: 600; letter-spacing: .04em; }
+    .fact__value { font-size: .9rem; font-weight: 600; color: var(--text-dark); margin-top: 2px; }
 
     /* ── Values ───────────────────────────────────── */
-    .value-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: var(--radius-md);
-      padding: 36px 28px;
-      transition: background var(--transition), transform var(--transition);
-    }
-    .value-card:hover {
-      background: rgba(255,255,255,.1);
-      transform: translateY(-4px);
-    }
-    .value-card__icon {
-      width: 56px; height: 56px;
-      border-radius: var(--radius-sm);
-      background: rgba(184,145,42,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      color: var(--gold-light);
-    }
-    .value-card h3 {
-      font-size: 1.2rem;
-      color: #fff;
-      margin-bottom: 12px;
-    }
-    .value-card p { font-size: .9rem; max-width: none; }
+    .value-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-md); padding: 34px 26px; transition: background var(--transition), transform var(--transition); }
+    .value-card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
+    .value-card__icon { width: 52px; height: 52px; border-radius: var(--radius-sm); background: rgba(184,145,42,.2); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; color: var(--gold-light); }
+    .value-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: 10px; }
+    .value-card p { font-size: .875rem; max-width: none; }
 
     /* ── Products ─────────────────────────────────── */
-    .products__header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 48px;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .products__tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      padding: 8px 20px;
-      border-radius: 100px;
-      font-size: .8125rem;
-      font-weight: 600;
-      border: 2px solid var(--green-pale);
-      background: transparent;
-      color: var(--text-light);
-      transition: all var(--transition);
-    }
-    .tab-btn.active,
-    .tab-btn:hover {
-      background: var(--green-dark);
-      border-color: var(--green-dark);
-      color: #fff;
-    }
-    .product-card {
-      background: #fff;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow var(--transition), transform var(--transition);
-      display: flex;
-      flex-direction: column;
-    }
-    .product-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-6px);
-    }
-    .product-card__img {
-      aspect-ratio: 1/1;
-      background: var(--green-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    .product-card__img::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 70% 30%, rgba(90,125,82,.15), transparent 70%);
-    }
-    .product-card__icon {
-      font-size: 4rem;
-      user-select: none;
-      position: relative;
-      z-index: 1;
-    }
-    .product-card__badge {
-      position: absolute;
-      top: 14px; right: 14px;
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: .6875rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-    .badge--bio { background: #c8e6c9; color: #1b5e20; }
-    .badge--new { background: var(--gold-light); color: #fff; }
-    .badge--classic { background: var(--brown-light); color: var(--text-dark); }
-    .product-card__body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
-    .product-card__category {
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 6px;
-    }
-    .product-card__name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-    .product-card__desc {
-      font-size: .85rem;
-      color: var(--text-light);
-      line-height: 1.5;
-      flex: 1;
-      max-width: none;
-    }
-    .product-card__footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--brown-light);
-    }
-    .product-card__price {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--green-dark);
-    }
-    .btn-cart {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: var(--green-dark);
-      color: #fff;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition), transform var(--transition);
-    }
-    .btn-cart:hover {
-      background: var(--green-mid);
-      transform: scale(1.1);
-    }
-    .btn-cart svg { width: 16px; height: 16px; }
+    .products__header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 44px; gap: 20px; flex-wrap: wrap; }
+    .products__filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn { padding: 7px 18px; border-radius: 100px; font-size: .8rem; font-weight: 600; border: 2px solid var(--brown-light); background: transparent; color: var(--text-light); transition: all var(--transition); }
+    .filter-btn.active, .filter-btn:hover { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
 
-    /* ── Process ──────────────────────────────────── */
-    .process__steps {
+    .products-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      position: relative;
-      margin-top: 56px;
-    }
-    .process__steps::before {
-      content: '';
-      position: absolute;
-      top: 36px;
-      left: calc(12.5% + 12px);
-      right: calc(12.5% + 12px);
-      height: 2px;
-      background: var(--green-pale);
-      z-index: 0;
-    }
-    .process__step {
-      text-align: center;
-      padding: 0 16px;
-      position: relative;
-      z-index: 1;
-    }
-    .process__step-num {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: var(--cream);
-      border: 3px solid var(--green-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--green-dark);
-      transition: all var(--transition);
-    }
-    .process__step:hover .process__step-num {
-      background: var(--green-dark);
-      color: #fff;
-      border-color: var(--green-dark);
-      box-shadow: 0 0 0 6px var(--green-pale);
-    }
-    .process__step h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: var(--text-dark);
-    }
-    .process__step p {
-      font-size: .85rem;
-      color: var(--text-light);
-      max-width: 180px;
-      margin: 0 auto;
-    }
-    .process__icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
+      gap: 22px;
     }
 
-    /* ── Testimonial ──────────────────────────────── */
-    .testimonials { background: var(--warm-white); }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 48px;
+    .product-card {
+      background: #fff; border-radius: var(--radius-md); overflow: hidden;
+      box-shadow: var(--shadow-sm); transition: box-shadow var(--transition), transform var(--transition);
+      display: flex; flex-direction: column;
     }
-    .testimonial-card {
-      background: #fff;
-      border-radius: var(--radius-md);
-      padding: 32px;
-      box-shadow: var(--shadow-sm);
+    .product-card:hover { box-shadow: var(--shadow-md); transform: translateY(-6px); }
+
+    /* Product image area */
+    .product-card__img-wrap {
       position: relative;
-    }
-    .testimonial-card::before {
-      content: '"';
-      position: absolute;
-      top: 16px; left: 24px;
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      color: var(--green-pale);
-      line-height: 1;
-    }
-    .testimonial-card__text {
-      font-size: .9375rem;
-      font-style: italic;
-      color: var(--text-mid);
-      line-height: 1.7;
-      margin-bottom: 24px;
-      padding-top: 20px;
-      max-width: none;
-    }
-    .testimonial-card__author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .testimonial-card__avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
       background: var(--green-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--green-dark);
     }
-    .testimonial-card__name { font-weight: 600; font-size: .9rem; color: var(--text-dark); }
-    .testimonial-card__location { font-size: .8rem; color: var(--text-light); }
-    .stars { color: var(--gold); font-size: .9rem; margin-bottom: 4px; }
+    .product-card__img-wrap img {
+      width: 100%; height: 100%;
+      transition: transform .5s ease;
+    }
+    .product-card:hover .product-card__img-wrap img { transform: scale(1.05); }
+
+    /* Gradient overlay so text on image stays legible */
+    .product-card__img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(30,40,28,.18), transparent 60%);
+      pointer-events: none;
+    }
+
+    .product-card__badge {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      padding: 4px 10px; border-radius: 100px;
+      font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .badge--bio     { background: #c8e6c9; color: #1b5e20; }
+    .badge--new     { background: var(--gold-light); color: #fff; }
+    .badge--classic { background: var(--brown-light); color: var(--text-dark); }
+    .badge--sale    { background: #ef5350; color: #fff; }
+
+    .product-card__body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .product-card__category { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 5px; }
+    .product-card__name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 7px; line-height: 1.3; }
+    .product-card__desc { font-size: .82rem; color: var(--text-light); line-height: 1.5; flex: 1; max-width: none; }
+    .product-card__footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--brown-light); }
+    .product-card__price { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--green-dark); }
+    .product-card__price-old { font-size: .8rem; color: var(--text-light); text-decoration: line-through; }
+
+    .btn-shop {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 100px;
+      background: var(--green-dark); color: #fff; border: none;
+      font-size: .78rem; font-weight: 600;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-shop:hover { background: var(--green-mid); transform: scale(1.04); }
+    .btn-shop svg { width: 14px; height: 14px; }
+
+    /* Hidden class for filter */
+    .product-card.hidden { display: none; }
+
+    /* ── Process ──────────────────────────────────── */
+    .process__steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-top: 56px; }
+    .process__steps::before { content: ''; position: absolute; top: 36px; left: calc(12.5% + 12px); right: calc(12.5% + 12px); height: 2px; background: var(--green-pale); z-index: 0; }
+    .process__step { text-align: center; padding: 0 14px; position: relative; z-index: 1; }
+    .process__step-num { width: 72px; height: 72px; border-radius: 50%; background: var(--cream); border: 3px solid var(--green-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--green-dark); transition: all var(--transition); }
+    .process__step:hover .process__step-num { background: var(--green-dark); color: #fff; border-color: var(--green-dark); box-shadow: 0 0 0 6px var(--green-pale); }
+    .process__step h3 { font-size: .95rem; margin-bottom: 8px; color: var(--text-dark); }
+    .process__step p { font-size: .82rem; color: var(--text-light); max-width: 170px; margin: 0 auto; }
+    .process__icon { font-size: 1.8rem; margin-bottom: 8px; }
+
+    /* ── Testimonials ─────────────────────────────── */
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+    .testimonial-card { background: #fff; border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm); position: relative; }
+    .testimonial-card::before { content: '"'; position: absolute; top: 16px; left: 22px; font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--green-pale); line-height: 1; }
+    .testimonial-card__text { font-size: .9rem; font-style: italic; color: var(--text-mid); line-height: 1.7; margin-bottom: 22px; padding-top: 20px; max-width: none; }
+    .testimonial-card__author { display: flex; align-items: center; gap: 10px; }
+    .testimonial-card__avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; color: var(--green-dark); }
+    .testimonial-card__name { font-weight: 600; font-size: .875rem; color: var(--text-dark); }
+    .testimonial-card__location { font-size: .75rem; color: var(--text-light); }
+    .stars { color: var(--gold); font-size: .85rem; margin-bottom: 4px; }
 
     /* ── Location ─────────────────────────────────── */
-    .location__map {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      background: var(--green-pale);
-      aspect-ratio: 16/9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .location__map-placeholder {
-      text-align: center;
-      color: var(--green-mid);
-    }
-    .location__map-placeholder svg { width: 48px; height: 48px; margin: 0 auto 12px; }
-    .location__map-placeholder p { color: var(--green-mid); font-size: .9rem; max-width: none; }
-    .location__info { padding-left: 24px; }
-    .location__detail {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--brown-light);
-    }
+    .location__map { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); aspect-ratio: 16/9; }
+    .location__map iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .location__info { padding-left: 20px; }
+    .location__detail { display: flex; align-items: flex-start; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--brown-light); }
     .location__detail:last-child { border-bottom: none; }
-    .location__detail-icon {
-      width: 44px; height: 44px;
-      border-radius: var(--radius-sm);
-      background: var(--green-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--green-mid);
-    }
-    .location__detail-label {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 3px;
-    }
-    .location__detail-value { font-size: .9375rem; color: var(--text-dark); font-weight: 500; }
+    .location__detail-icon { width: 42px; height: 42px; border-radius: var(--radius-sm); background: var(--green-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--green-mid); }
+    .location__detail-label { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px; }
+    .location__detail-value { font-size: .9rem; color: var(--text-dark); font-weight: 500; line-height: 1.5; }
 
     /* ── Newsletter ───────────────────────────────── */
-    .newsletter {
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
-    }
-    .newsletter__inner {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .newsletter__form {
-      display: flex;
-      gap: 12px;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
-    .newsletter__input {
-      flex: 1;
-      min-width: 220px;
-      padding: 14px 20px;
-      border-radius: 100px;
-      border: 2px solid rgba(255,255,255,.2);
-      background: rgba(255,255,255,.1);
-      color: #fff;
-      font-size: .9375rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color var(--transition);
-    }
+    .newsletter { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%); }
+    .newsletter__inner { max-width: 580px; margin: 0 auto; text-align: center; }
+    .newsletter__form { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+    .newsletter__input { flex: 1; min-width: 220px; padding: 13px 20px; border-radius: 100px; border: 2px solid rgba(255,255,255,.2); background: rgba(255,255,255,.1); color: #fff; font-size: .9375rem; font-family: inherit; outline: none; transition: border-color var(--transition); }
     .newsletter__input::placeholder { color: rgba(255,255,255,.5); }
     .newsletter__input:focus { border-color: rgba(255,255,255,.5); }
 
     /* ── Footer ───────────────────────────────────── */
-    .footer {
-      background: #1a2618;
-      color: rgba(255,255,255,.7);
-      padding: 72px 0 32px;
-    }
-    .footer__grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 56px;
-    }
-    .footer__brand-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .footer__brand-sub {
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 20px;
-    }
-    .footer__brand-desc {
-      font-size: .875rem;
-      line-height: 1.7;
-      max-width: 280px;
-      color: rgba(255,255,255,.55);
-    }
-    .footer__social {
-      display: flex;
-      gap: 10px;
-      margin-top: 24px;
-    }
-    .footer__social a {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,.7);
-      transition: all var(--transition);
-    }
-    .footer__social a:hover {
-      background: var(--gold);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-    .footer__social svg { width: 16px; height: 16px; }
-    .footer__heading {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer__links a {
-      font-size: .875rem;
-      color: rgba(255,255,255,.55);
-      transition: color var(--transition);
-    }
+    .footer { background: #1a2618; color: rgba(255,255,255,.7); padding: 68px 0 28px; }
+    .footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 52px; }
+    .footer__brand-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .footer__brand-sub { font-size: .65rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 18px; }
+    .footer__brand-desc { font-size: .85rem; line-height: 1.7; max-width: 270px; color: rgba(255,255,255,.5); }
+    .footer__social { display: flex; gap: 8px; margin-top: 22px; }
+    .footer__social a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7); transition: all var(--transition); }
+    .footer__social a:hover { background: var(--gold); color: #fff; transform: translateY(-2px); }
+    .footer__social svg { width: 15px; height: 15px; }
+    .footer__heading { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; margin-bottom: 18px; }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer__links a { font-size: .85rem; color: rgba(255,255,255,.5); transition: color var(--transition); }
     .footer__links a:hover { color: var(--gold-light); }
-    .footer__bottom {
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding-top: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer__bottom p { font-size: .8125rem; color: rgba(255,255,255,.4); max-width: none; }
-    .footer__bottom-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .footer__bottom-links a {
-      font-size: .8125rem;
-      color: rgba(255,255,255,.4);
-      transition: color var(--transition);
-    }
+    .footer__bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 26px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer__bottom p { font-size: .78rem; color: rgba(255,255,255,.4); max-width: none; }
+    .footer__bottom-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer__bottom-links a { font-size: .78rem; color: rgba(255,255,255,.4); transition: color var(--transition); }
     .footer__bottom-links a:hover { color: rgba(255,255,255,.8); }
 
-    /* ── Animations ───────────────────────────────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
+    /* ── Scroll reveal ────────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .fade-up:nth-child(2) { transition-delay: .1s; }
     .fade-up:nth-child(3) { transition-delay: .2s; }
     .fade-up:nth-child(4) { transition-delay: .3s; }
 
     /* ── Responsive ───────────────────────────────── */
-    @media (max-width: 1024px) {
-      .grid-4 { grid-template-columns: repeat(2, 1fr); }
-      .footer__grid { grid-template-columns: 1fr 1fr; gap: 36px; }
-      .process__steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    @media (max-width: 1100px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process__steps { grid-template-columns: repeat(2, 1fr); gap: 36px; }
       .process__steps::before { display: none; }
     }
     @media (max-width: 768px) {
-      .section { padding: 64px 0; }
-      .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+      .section { padding: 60px 0; }
+      .grid-2 { grid-template-columns: 1fr; gap: 36px; }
       .grid-3 { grid-template-columns: 1fr; }
-      .grid-4 { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
       .nav__links { display: none; }
+      .nav__cta { display: none; }
       .nav__burger { display: flex; }
-      .hero__badge { display: none; }
-      .story__image-card { right: 0; bottom: -16px; }
+      .hero__stats { display: none; }
+      .story__overlay-card { right: 0; bottom: -16px; }
       .story__facts { grid-template-columns: 1fr; }
       .story__text { padding-left: 0; }
       .testimonial-grid { grid-template-columns: 1fr; }
-      .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer__grid { grid-template-columns: 1fr; gap: 28px; }
       .products__header { flex-direction: column; align-items: flex-start; }
       .location__info { padding-left: 0; }
     }
     @media (max-width: 480px) {
       h1 { font-size: 2rem; }
       h2 { font-size: 1.6rem; }
-      .trust-bar__inner { gap: 24px; }
+      .trust-bar__inner { gap: 20px; }
+      .products-grid { grid-template-columns: 1fr; }
       .process__steps { grid-template-columns: 1fr; }
       .newsletter__form { flex-direction: column; }
     }
@@ -940,7 +374,7 @@
   <!-- ══ Navigation ═══════════════════════════════════ -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#" class="nav__logo">
+      <a href="https://www.moreaolivenoel.com" target="_blank" rel="noopener" class="nav__logo">
         <span class="nav__logo-main">Morea</span>
         <span class="nav__logo-sub">Olivenöl · Mani, Griechenland</span>
       </a>
@@ -950,10 +384,17 @@
         <li><a href="#herstellung">Herstellung</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
-      <a href="#produkte" class="btn nav__cta">Jetzt kaufen</a>
+      <a href="https://www.moreaolivenoel.com/" target="_blank" rel="noopener" class="nav__cta">Zum Shop</a>
       <button class="nav__burger" id="burger" aria-label="Menü öffnen">
         <span></span><span></span><span></span>
       </button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu">
+      <a href="#story">Unsere Geschichte</a>
+      <a href="#produkte">Produkte</a>
+      <a href="#herstellung">Herstellung</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="https://www.moreaolivenoel.com/" target="_blank" rel="noopener" class="nav__cta">Zum Shop</a>
     </div>
   </nav>
 
@@ -968,19 +409,25 @@
       </h1>
       <p class="hero__subtitle">
         Kaltgepresst aus handverlesenen Koroneiki-Oliven.
-        Direkt aus unserer traditionellen Steinmühle in der griechischen Mani zu Ihnen.
+        Direkt aus unserer traditionellen Steinmühle in der griechischen Mani zu Ihnen nach Hause.
       </p>
       <div class="hero__actions">
-        <a href="#produkte" class="btn btn--primary">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          Produkte entdecken
+        <a href="https://www.moreaolivenoel.com/" target="_blank" rel="noopener" class="btn btn--primary">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Jetzt kaufen
         </a>
         <a href="#story" class="btn btn--outline">Unsere Geschichte</a>
       </div>
     </div>
-    <div class="hero__badge">
-      <div class="hero__badge-num">100%</div>
-      <div class="hero__badge-text">Koroneiki<br/>Kaltpressung</div>
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <div class="hero__stat-num">100%</div>
+        <div class="hero__stat-text">Koroneiki<br/>Kaltpressung</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">1</div>
+        <div class="hero__stat-text">der letzten<br/>Steinmühlen</div>
+      </div>
     </div>
     <div class="hero__scroll" aria-hidden="true">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
@@ -992,20 +439,24 @@
   <div class="trust-bar">
     <div class="trust-bar__inner">
       <div class="trust-item">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         100% Natives Extra Vergine
       </div>
       <div class="trust-item">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Direkt vom Erzeuger
       </div>
       <div class="trust-item">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
         Familienbetrieb seit Generationen
       </div>
       <div class="trust-item">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        Handgepresst & unfiltriert
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Handgepresst & naturbelassen
+      </div>
+      <div class="trust-item">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Versand nach DE · AT · CH
       </div>
     </div>
   </div>
@@ -1017,13 +468,13 @@
         <div class="story__image-wrap">
           <img
             class="story__image"
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
-            alt="Traditionelle Steinmühle in Thalames, Mani"
+            src="https://images.unsplash.com/photo-1665686308827-eb62e4f6604d?w=800&q=80"
+            alt="Traditionelle Olivenölmühle in Griechenland"
             loading="lazy"
           />
-          <div class="story__image-card">
-            <div class="story__image-card-num">50 km</div>
-            <div class="story__image-card-text">südlich von Kalamata<br/>in der Mani gelegen</div>
+          <div class="story__overlay-card">
+            <div class="story__overlay-card-num">50 km</div>
+            <div class="story__overlay-card-text">südlich von Kalamata<br/>in der Mani gelegen</div>
           </div>
         </div>
         <div class="story__text">
@@ -1033,53 +484,33 @@
           <p>
             In Thalames, einem kleinen Bergdorf in der südgriechischen Mani, steht unsere Steinmühle.
             Sie gehört zu den letzten ihrer Art auf dem Peloponnes und verkörpert eine Tradition,
-            die bis in die Antike zurückreicht.
+            die bis in die Antike zurückreicht – 15 km vor Areopoli, mitten im Herz der Mani.
           </p>
           <blockquote class="story__quote">
             „Wir pressen unsere Koroneiki-Oliven so, wie es seit Jahrhunderten gemacht wird –
             langsam, schonend, ehrlich."
           </blockquote>
           <p>
-            Unser Olivenöl entsteht ausschließlich aus Koroneiki-Oliven, die in der unberührten
-            Landschaft der Mani wachsen. Kein Mischen, keine Zusätze – nur pures, kaltgepresstes
-            Extra Vergine Olivenöl von höchster Qualität.
+            Unser Olivenöl entsteht ausschließlich aus Koroneiki-Oliven der Region.
+            Kein Mischen, keine Zusätze – nur pures, kaltgepresstes Extra Vergine Olivenöl.
+            Neben dem Öl führen wir auch Oliven, Kapern, Honig und weitere Produkte direkt aus der Mani.
           </p>
           <div class="story__facts">
             <div class="fact">
-              <div class="fact__icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-              </div>
-              <div>
-                <div class="fact__label">Lage</div>
-                <div class="fact__value">Thalames, Mani</div>
-              </div>
+              <div class="fact__icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg></div>
+              <div><div class="fact__label">Lage</div><div class="fact__value">Thalames, Mani</div></div>
             </div>
             <div class="fact">
-              <div class="fact__icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
-              </div>
-              <div>
-                <div class="fact__label">Sorte</div>
-                <div class="fact__value">100% Koroneiki</div>
-              </div>
+              <div class="fact__icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+              <div><div class="fact__label">Sorte</div><div class="fact__value">100% Koroneiki</div></div>
             </div>
             <div class="fact">
-              <div class="fact__icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div>
-                <div class="fact__label">Zertifizierung</div>
-                <div class="fact__value">Extra Vergine</div>
-              </div>
+              <div class="fact__icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div><div class="fact__label">Zertifizierung</div><div class="fact__value">Extra Vergine</div></div>
             </div>
             <div class="fact">
-              <div class="fact__icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-              </div>
-              <div>
-                <div class="fact__label">Methode</div>
-                <div class="fact__value">Kaltpressung</div>
-              </div>
+              <div class="fact__icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+              <div><div class="fact__label">Methode</div><div class="fact__value">Kaltpressung &amp; Steinmühle</div></div>
             </div>
           </div>
         </div>
@@ -1095,25 +526,19 @@
         <h2 style="color:#fff">Was uns auszeichnet</h2>
         <div class="divider divider--center"></div>
       </div>
-      <div class="grid-3" style="margin-top:48px">
+      <div class="grid-3" style="margin-top:44px">
         <div class="value-card fade-up">
-          <div class="value-card__icon">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3>Reinsortig & unverfälscht</h3>
+          <div class="value-card__icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <h3>Reinsortig &amp; unverfälscht</h3>
           <p>Ausschließlich Koroneiki-Oliven aus eigenem Anbau. Kein Blend, keine Zusätze – Olivenöl in seiner reinsten Form.</p>
         </div>
         <div class="value-card fade-up">
-          <div class="value-card__icon">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          </div>
+          <div class="value-card__icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
           <h3>Traditionelle Steinmühle</h3>
-          <p>Eine der letzten Steinmühlen auf dem Peloponnes. Das schonende Mahlverfahren schützt die wertvollen Polyphenole und Aromen.</p>
+          <p>Eine der letzten Steinmühlen auf dem Peloponnes. Das schonende Mahlverfahren schützt wertvolle Polyphenole und Aromen.</p>
         </div>
         <div class="value-card fade-up">
-          <div class="value-card__icon">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
+          <div class="value-card__icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
           <h3>Direkt vom Erzeuger</h3>
           <p>Kein Zwischenhändler. Sie kaufen direkt bei der Familie, die das Öl produziert. Frischer und transparenter geht es nicht.</p>
         </div>
@@ -1130,157 +555,331 @@
           <h2>Vom Baum in Ihre Küche</h2>
           <div class="divider"></div>
         </div>
-        <div class="products__tabs">
-          <button class="tab-btn active">Alle</button>
-          <button class="tab-btn">Olivenöl</button>
-          <button class="tab-btn">Aromatisiert</button>
-          <button class="tab-btn">Weiteres</button>
+        <div class="products__filters">
+          <button class="filter-btn active" data-filter="all">Alle</button>
+          <button class="filter-btn" data-filter="olivenoel">Olivenöl</button>
+          <button class="filter-btn" data-filter="aromatisiert">Aromatisiert</button>
+          <button class="filter-btn" data-filter="delikatessen">Delikatessen</button>
         </div>
       </div>
-      <div class="grid-4">
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
+      <div class="products-grid">
+
+        <!-- Olivenöl Extra Vergine 2,5l -->
+        <div class="product-card fade-up" data-category="olivenoel">
+          <div class="product-card__img-wrap">
             <span class="product-card__badge badge--classic">Klassiker</span>
-            <div class="product-card__icon">🫙</div>
+            <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&q=80" alt="Olivenöl Extra Vergine 2,5l Kanister" loading="lazy" />
           </div>
           <div class="product-card__body">
-            <div class="product-card__category">Olivenöl · 2,5 l</div>
-            <div class="product-card__name">Extra Vergine 2,5 l Kanister</div>
+            <div class="product-card__category">Olivenöl · 2,5 l Kanister</div>
+            <div class="product-card__name">Extra Vergine 2,5 l</div>
             <div class="product-card__desc">Unser klassisches Olivenöl – fruchtig, mild-scharf, aus reinen Koroneiki-Oliven kaltgepresst.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 28 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/kopie-von-i-m-a-product" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
+        <!-- Olivenöl Extra Vergine 0,5l -->
+        <div class="product-card fade-up" data-category="olivenoel">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1620756236308-65c3ef5d25f3?w=500&q=80" alt="Olivenöl Extra Vergine 0,5l Flasche" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Olivenöl · 0,5 l Flasche</div>
+            <div class="product-card__name">Extra Vergine 0,5 l</div>
+            <div class="product-card__desc">Das klassische Morea-Öl in der handlichen Flasche. Ideal zum Ausprobieren und Verschenken.</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">14,80 €</span>
+              <a href="https://www.moreaolivenoel.com/product-page/oliven%C3%B6l-extra-vergine-0-5l-flasche" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio Olivenöl 2,5l -->
+        <div class="product-card fade-up" data-category="olivenoel">
+          <div class="product-card__img-wrap">
             <span class="product-card__badge badge--bio">Bio</span>
-            <div class="product-card__icon">🍃</div>
+            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500&q=80" alt="Bio Olivenöl Extra Vergine 2,5l" loading="lazy" />
           </div>
           <div class="product-card__body">
-            <div class="product-card__category">Olivenöl · 2,5 l</div>
+            <div class="product-card__category">Bio Olivenöl · 2,5 l Kanister</div>
             <div class="product-card__name">Bio Extra Vergine 2,5 l</div>
-            <div class="product-card__desc">Zertifiziert biologisch angebaut, ohne Pestizide. Intensiver Geschmack, höchste Polyphenolgehalt.</div>
+            <div class="product-card__desc">Zertifiziert biologisch, ohne Pestizide. Intensiver Geschmack mit hohem Polyphenolgehalt.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 34 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">60,00 €</span>
+              <a href="https://www.moreaolivenoel.com/product-page/bio-oliven%C3%B6l-extra-vergine-2-5l-kanister" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
-            <div class="product-card__icon">🍋</div>
+        <!-- Bio Olivenöl 0,5l -->
+        <div class="product-card fade-up" data-category="olivenoel">
+          <div class="product-card__img-wrap">
+            <span class="product-card__badge badge--bio">Bio</span>
+            <img src="https://images.unsplash.com/photo-1575218823251-6d1500cd74a4?w=500&q=80" alt="Bio Olivenöl Extra Vergine 0,5l" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Bio Olivenöl · 0,5 l Flasche</div>
+            <div class="product-card__name">Bio Extra Vergine 0,5 l</div>
+            <div class="product-card__desc">Biologisch zertifiziert in der praktischen Flasche – für alle, die auf höchste Bio-Qualität setzen.</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">15,80 €</span>
+              <a href="https://www.moreaolivenoel.com/product-page/bio-oliven%C3%B6l-extra-vergine-0-5l-flasche" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mildes Kochöl -->
+        <div class="product-card fade-up" data-category="olivenoel">
+          <div class="product-card__img-wrap">
+            <span class="product-card__badge badge--new">Ab April 2026</span>
+            <img src="https://images.unsplash.com/photo-1598511757337-fe2cafc31ba0?w=500&q=80" alt="Mildes Kochöl 2,5l" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Kochöl · 2,5 l Kanister</div>
+            <div class="product-card__name">Mildes Kochöl 2,5 l</div>
+            <div class="product-card__desc">Länger in Edelstahltanks gelagert – milder, hitzebeständig, spritzt weniger. Perfekt zum Braten &amp; Kochen.</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">35,00 €</span>
+              <a href="https://www.moreaolivenoel.com/product-page/mildes-koch%C3%B6l-oliven%C3%B6l-extra-vergine-2-5l-kanister" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zitronen Olivenöl -->
+        <div class="product-card fade-up" data-category="aromatisiert">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=500&q=80" alt="Zitronen Olivenöl 0,25l" loading="lazy" />
           </div>
           <div class="product-card__body">
             <div class="product-card__category">Aromatisiert · 0,25 l</div>
-            <div class="product-card__name">Zitronen Olivenöl 0,25 l</div>
-            <div class="product-card__desc">Frisch & zitrusartig – ideal zu Fisch, Salaten und als Finish auf gegrilltem Gemüse.</div>
+            <div class="product-card__name">Zitronen Olivenöl</div>
+            <div class="product-card__desc">Frisch &amp; zitrusartig – ideal zu Fisch, Salaten und als Finish auf gegrilltem Gemüse.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 9 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/zitronen-oliven%C3%B6l-extra-vergine-0-25l-flasche" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
-            <div class="product-card__icon">🍊</div>
+        <!-- Orangen Olivenöl -->
+        <div class="product-card fade-up" data-category="aromatisiert">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?w=500&q=80" alt="Orangen Olivenöl 0,25l" loading="lazy" />
           </div>
           <div class="product-card__body">
             <div class="product-card__category">Aromatisiert · 0,25 l</div>
-            <div class="product-card__name">Orangen Olivenöl 0,25 l</div>
-            <div class="product-card__desc">Süßlich-fruchtige Note – perfekt für Desserts, Backwaren und Vinaigrettes.</div>
+            <div class="product-card__name">Orangen Olivenöl</div>
+            <div class="product-card__desc">Süßlich-fruchtige Note – perfekt für Desserts, Backwaren und Vinaigrettes mit mediterranem Flair.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 9 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/orangen-oliven%C3%B6l-extra-vergine-0-25l-flasche" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
-            <div class="product-card__icon">🧄</div>
+        <!-- Knoblauch Olivenöl -->
+        <div class="product-card fade-up" data-category="aromatisiert">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=500&q=80" alt="Knoblauch Olivenöl 0,25l" loading="lazy" />
           </div>
           <div class="product-card__body">
             <div class="product-card__category">Aromatisiert · 0,25 l</div>
-            <div class="product-card__name">Knoblauch Olivenöl 0,25 l</div>
-            <div class="product-card__desc">Würzig & aromatisch – der ideale Begleiter für mediterrane Küche, Bruschetta und Pasta.</div>
+            <div class="product-card__name">Knoblauch Olivenöl</div>
+            <div class="product-card__desc">Würzig &amp; aromatisch – ideal zum Marinieren, für Bruschetta und mediterrane Pasta-Gerichte.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 9 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/knoblauch-oliven%C3%B6l-extra-vergine-0-25l" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
-            <div class="product-card__icon">🌿</div>
+        <!-- Basilikum Olivenöl -->
+        <div class="product-card fade-up" data-category="aromatisiert">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=500&q=80" alt="Basilikum Olivenöl 0,25l" loading="lazy" />
           </div>
           <div class="product-card__body">
             <div class="product-card__category">Aromatisiert · 0,25 l</div>
-            <div class="product-card__name">Basilikum Olivenöl 0,25 l</div>
-            <div class="product-card__desc">Mediterran & krautig – ideal für Caprese, Pasta und als Dip zu frischem Brot.</div>
+            <div class="product-card__name">Basilikum Olivenöl</div>
+            <div class="product-card__desc">Mediterran &amp; krautig – ideal für Caprese, Pasta und als Dip zu frischem Brot.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 9 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/basilikum-oliven%C3%B6l-extra-vergine-0-25l-flasche" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
-            <div class="product-card__icon">🌶️</div>
+        <!-- Chili Olivenöl -->
+        <div class="product-card fade-up" data-category="aromatisiert">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1603048297172-c92544798d5a?w=500&q=80" alt="Chili Olivenöl 0,25l" loading="lazy" />
           </div>
           <div class="product-card__body">
             <div class="product-card__category">Aromatisiert · 0,25 l</div>
-            <div class="product-card__name">Chili Olivenöl 0,25 l</div>
-            <div class="product-card__desc">Feurig & intensiv – für alle, die es etwas schärfer mögen. Großartig zu Pizza und gegrilltem Fleisch.</div>
+            <div class="product-card__name">Chili Olivenöl</div>
+            <div class="product-card__desc">Feurig &amp; intensiv – für alle, die es schärfer mögen. Großartig zu Pizza und gegrilltem Fleisch.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 9 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/en/product-page/chili-oliven%C3%B6l-extra-vergine-0-25l-flasche" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="product-card fade-up">
-          <div class="product-card__img">
-            <span class="product-card__badge badge--new">Neu</span>
-            <div class="product-card__icon">🧂</div>
+        <!-- Oregano Olivenöl -->
+        <div class="product-card fade-up" data-category="aromatisiert">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1600565193348-f74bd3960d0a?w=500&q=80" alt="Oregano Olivenöl 0,25l" loading="lazy" />
           </div>
           <div class="product-card__body">
-            <div class="product-card__category">Meeresfrüchte · 340 g</div>
+            <div class="product-card__category">Aromatisiert · 0,25 l</div>
+            <div class="product-card__name">Oregano Olivenöl</div>
+            <div class="product-card__desc">Griechisch &amp; aromatisch – das ideale Würzöl für mediterrane Fleischgerichte und Hülsenfrüchte.</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/en/product-page/oregano-oliven%C3%B6l-extra-vergine-0-25l-flasche" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ingwer Olivenöl -->
+        <div class="product-card fade-up" data-category="aromatisiert">
+          <div class="product-card__img-wrap">
+            <span class="product-card__badge badge--sale">Sonderpreis</span>
+            <img src="https://images.unsplash.com/photo-1607920592519-bab2a80efd33?w=500&q=80" alt="Ingwer Olivenöl 0,25l" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Aromatisiert · 0,25 l</div>
+            <div class="product-card__name">Ingwer Olivenöl</div>
+            <div class="product-card__desc">Exotisch &amp; scharf – Ingwer trifft auf Koroneiki-Öl. Sonderpreis wegen kurzem MHD (10/25).</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/ingwer-oliven%C3%B6l-extra-vergine-0-25l-flasche" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fleur de Sel -->
+        <div class="product-card fade-up" data-category="delikatessen">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?w=500&q=80" alt="Fleur de Sel 340g" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Meersalz · 340 g</div>
             <div class="product-card__name">Fleur de Sel 340 g</div>
-            <div class="product-card__desc">Handgeschöpftes Meersalz aus der Region – zart knusprig, mineral-salzig, unverzichtbar in der Gourmetküche.</div>
+            <div class="product-card__desc">Handgeschöpftes Meersalz – zart knusprig, mineralisch, unverzichtbar in der Gourmetküche.</div>
             <div class="product-card__footer">
-              <span class="product-card__price">ab 7 €</span>
-              <button class="btn-cart" aria-label="In den Warenkorb">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/fleur-de-sel-340g" target="_blank" rel="noopener" class="btn-shop">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
+                Kaufen
+              </a>
             </div>
           </div>
         </div>
 
-      </div>
-      <div class="text-center" style="margin-top:48px">
-        <a href="#" class="btn btn--outline-dark">Alle Produkte ansehen</a>
+        <!-- Kalamata Oliven -->
+        <div class="product-card fade-up" data-category="delikatessen">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1593001874117-c99c800e3b0a?w=500&q=80" alt="Kalamata Oliven in Olivenöl 340g" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Oliven · 340 g</div>
+            <div class="product-card__name">Kalamata Oliven in Olivenöl</div>
+            <div class="product-card__desc">Dunkle, aromatische Kalamata-Oliven in feinstem Olivenöl eingelegt. Direkt aus der Region.</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/kalamata-oliven-in-oliven%C3%B6l-340g" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grüne Oliven -->
+        <div class="product-card fade-up" data-category="delikatessen">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1659613970706-e49c23cb25d6?w=500&q=80" alt="Grüne Oliven in Olivenöl 340g" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Oliven · 340 g</div>
+            <div class="product-card__name">Grüne Oliven in Olivenöl</div>
+            <div class="product-card__desc">Milde, grüne Oliven in Olivenöl – knackig, fruchtig, perfekt als Antipasto oder zum Kochen.</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/gr%C3%BCne-oliven-in-oliven%C3%B6l-340g" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kapern -->
+        <div class="product-card fade-up" data-category="delikatessen">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=500&q=80" alt="Kapern in Olivenöl 95g" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__category">Kapern · 95 g</div>
+            <div class="product-card__name">Kapern in Olivenöl 95 g</div>
+            <div class="product-card__desc">Griechische Kapern in feinstem Olivenöl – intensiv, salzig, unverzichtbar in der mediterranen Küche.</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">Preis im Shop</span>
+              <a href="https://www.moreaolivenoel.com/product-page/kapern-in-oliven%C3%B6l-95g" target="_blank" rel="noopener" class="btn-shop">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Kaufen
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.products-grid -->
+
+      <div class="text-center" style="margin-top:44px">
+        <a href="https://www.moreaolivenoel.com/" target="_blank" rel="noopener" class="btn btn--outline-dark">
+          Alle Produkte im offiziellen Shop ansehen
+        </a>
       </div>
     </div>
   </section>
@@ -1299,32 +898,32 @@
           <div class="process__step-num">01</div>
           <div class="process__icon">🫒</div>
           <h3>Handernte</h3>
-          <p>Jede Olive wird von Hand von unseren Bäumen in der Mani geerntet – schonend und im optimalen Reifegrad.</p>
+          <p>Jede Olive wird von Hand in der Mani geerntet – schonend und im optimalen Reifegrad.</p>
         </div>
         <div class="process__step">
           <div class="process__step-num">02</div>
           <div class="process__icon">⚙️</div>
           <h3>Steinmühle</h3>
-          <p>In der traditionellen Steinmühle werden die Oliven noch am Erntetag gemahlen – für maximale Frische.</p>
+          <p>Die Oliven werden noch am Erntetag in der traditionellen Steinmühle gemahlen.</p>
         </div>
         <div class="process__step">
           <div class="process__step-num">03</div>
           <div class="process__icon">🌡️</div>
           <h3>Kaltpressung</h3>
-          <p>Ohne Wärme, ohne Chemikalien. Nur mechanischer Druck erhält alle wertvollen Inhaltsstoffe.</p>
+          <p>Ohne Wärme, ohne Chemikalien – nur mechanischer Druck erhält alle Inhaltsstoffe.</p>
         </div>
         <div class="process__step">
           <div class="process__step-num">04</div>
           <div class="process__icon">📦</div>
           <h3>Direktversand</h3>
-          <p>Frisch abgefüllt und direkt zu Ihnen geliefert – kein Lager, kein Umweg, maximale Qualität.</p>
+          <p>Frisch abgefüllt und direkt zu Ihnen – kein Lager, kein Umweg, maximale Qualität.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ══ Testimonials ════════════════════════════════════ -->
-  <section class="section testimonials">
+  <section class="section section--alt">
     <div class="container">
       <div class="text-center">
         <span class="label">Kundenstimmen</span>
@@ -1334,11 +933,7 @@
       <div class="testimonial-grid">
         <div class="testimonial-card fade-up">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-card__text">
-            Endlich ein Olivenöl, das wirklich schmeckt wie in Griechenland. Die Qualität ist
-            außergewöhnlich – fruchtig, würzig, mit einem leichten Bitterton, der einfach
-            ein Zeichen für Frische ist.
-          </p>
+          <p class="testimonial-card__text">Endlich ein Olivenöl, das wirklich schmeckt wie in Griechenland. Die Qualität ist außergewöhnlich – fruchtig, würzig, mit einem leichten Bitterton, der Frische signalisiert.</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">MB</div>
             <div>
@@ -1349,10 +944,7 @@
         </div>
         <div class="testimonial-card fade-up">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-card__text">
-            Ich bestelle seit drei Jahren direkt bei Morea. Der Geschmack ist unvergleichlich
-            und der Service ist familiär und herzlich. Man spürt, dass hier Leidenschaft dahintersteckt.
-          </p>
+          <p class="testimonial-card__text">Ich bestelle seit drei Jahren direkt bei Morea. Der Geschmack ist unvergleichlich und der Service ist familiär und herzlich. Man spürt die Leidenschaft dahinter.</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">TK</div>
             <div>
@@ -1363,16 +955,12 @@
         </div>
         <div class="testimonial-card fade-up">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-card__text">
-            Das Zitronen-Olivenöl ist ein absolutes Highlight! Es verfeinert jeden Salat
-            und jeden Fisch auf eine Weise, die kein Supermarktöl je erreichen könnte.
-            Definitiv eine Empfehlung wert.
-          </p>
+          <p class="testimonial-card__text">Das Zitronen-Olivenöl ist ein absolutes Highlight! Es verfeinert jeden Salat auf eine Weise, die kein Supermarktöl je erreichen könnte. Klare Empfehlung.</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">SL</div>
             <div>
               <div class="testimonial-card__name">Sabine L.</div>
-              <div class="testimonional-card__location">Wien</div>
+              <div class="testimonial-card__location">Wien</div>
             </div>
           </div>
         </div>
@@ -1388,58 +976,54 @@
           <span class="label">Wo Sie uns finden</span>
           <h2>Besuchen Sie unsere Mühle</h2>
           <div class="divider"></div>
-          <p style="margin-bottom:8px">
-            Unser Mühlenladen liegt direkt neben der Mühle im Dorfzentrum von Thalames.
-            Kommen Sie vorbei, probieren Sie unsere Öle und erleben Sie die Magie
-            der Steinmühle aus nächster Nähe.
-          </p>
-          <div style="margin-top:32px">
+          <p>Unser Mühlenladen liegt direkt neben der Mühle im Dorfzentrum von Thalames. Kommen Sie vorbei, probieren Sie unsere Öle und erleben Sie die Steinmühle aus nächster Nähe.</p>
+          <div style="margin-top:28px">
             <div class="location__detail">
-              <div class="location__detail-icon">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-              </div>
+              <div class="location__detail-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg></div>
               <div>
                 <div class="location__detail-label">Adresse</div>
-                <div class="location__detail-value">Thalames, Mani, Griechenland<br/>50 km südlich von Kalamata</div>
+                <div class="location__detail-value">Thalames, Mani, Griechenland<br/>50 km südlich von Kalamata · 15 km vor Areopoli</div>
               </div>
             </div>
             <div class="location__detail">
-              <div class="location__detail-icon">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </div>
+              <div class="location__detail-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
               <div>
-                <div class="location__detail-label">Öffnungszeiten Mühlenladen</div>
+                <div class="location__detail-label">Mühlenladen</div>
                 <div class="location__detail-value">Täglich 9:00 – 19:00 Uhr<br/>(während der Saison)</div>
               </div>
             </div>
             <div class="location__detail">
-              <div class="location__detail-icon">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </div>
+              <div class="location__detail-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
               <div>
                 <div class="location__detail-label">Online bestellen</div>
-                <div class="location__detail-value">Direkt über unseren Webshop<br/>Lieferung nach Deutschland, Österreich, Schweiz</div>
+                <div class="location__detail-value">Lieferung nach Deutschland, Österreich &amp; Schweiz<br/>Bestellung über <a href="https://www.moreaolivenoel.com/" target="_blank" rel="noopener" style="color:var(--green-mid);font-weight:600">moreaolivenoel.com</a></div>
+              </div>
+            </div>
+            <div class="location__detail">
+              <div class="location__detail-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+              <div>
+                <div class="location__detail-label">Social Media</div>
+                <div class="location__detail-value">
+                  <a href="https://www.facebook.com/MoreaOlivenoel/" target="_blank" rel="noopener" style="color:var(--green-mid);font-weight:600">Facebook</a> &nbsp;·&nbsp;
+                  <a href="https://www.instagram.com/morea_oliveoil/" target="_blank" rel="noopener" style="color:var(--green-mid);font-weight:600">Instagram</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div>
           <div class="location__map">
-            <div class="location__map-placeholder">
-              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-              <p style="font-weight:600;font-size:1rem;margin-bottom:6px">Thalames, Mani</p>
-              <p>Morea Steinmühle · Peloponnes, Griechenland</p>
-            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.0!2d22.35!3d36.72!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14990000000!2sThalames%2C+Greece!5e0!3m2!1sde!2sde!4v1"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Morea Olivenöl Standort Thalames Mani Griechenland"
+            ></iframe>
           </div>
-          <div style="text-align:center;margin-top:20px">
-            <a
-              href="https://maps.google.com/?q=Thalames+Mani+Greece"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn--outline-dark"
-              style="font-size:.875rem"
-            >
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+          <div style="text-align:center;margin-top:16px">
+            <a href="https://maps.google.com/?q=Thalames+Mani+Greece" target="_blank" rel="noopener" class="btn btn--outline-dark" style="font-size:.875rem">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
               In Google Maps öffnen
             </a>
           </div>
@@ -1454,20 +1038,12 @@
       <div class="newsletter__inner">
         <span class="label label--light">Bleiben Sie informiert</span>
         <h2 style="color:#fff">Neue Ernte, neue Aromen –<br/>als Erstes erfahren</h2>
-        <p style="color:rgba(255,255,255,.7);margin:16px auto 0">
-          Tragen Sie sich ein und erhalten Sie exklusive Angebote, Rezeptideen
-          und Neuigkeiten direkt aus der Mühle in Thalames.
+        <p style="color:rgba(255,255,255,.7);margin:14px auto 0">
+          Exklusive Angebote, Rezeptideen und Neuigkeiten direkt aus der Mühle in Thalames.
         </p>
-        <form class="newsletter__form" onsubmit="return false">
-          <input
-            class="newsletter__input"
-            type="email"
-            placeholder="Ihre E-Mail-Adresse"
-            aria-label="E-Mail-Adresse"
-          />
-          <button class="btn btn--primary" type="submit">
-            Anmelden
-          </button>
+        <form class="newsletter__form" onsubmit="handleNewsletter(event)">
+          <input class="newsletter__input" type="email" placeholder="Ihre E-Mail-Adresse" aria-label="E-Mail-Adresse" required />
+          <button class="btn btn--primary" type="submit">Anmelden</button>
         </form>
       </div>
     </div>
@@ -1480,60 +1056,56 @@
         <div>
           <div class="footer__brand-name">Morea</div>
           <div class="footer__brand-sub">Olivenöl · Mani, Griechenland</div>
-          <p class="footer__brand-desc">
-            Natives Olivenöl Extra aus der traditionellen Steinmühle in Thalames,
-            Mani. Handgepresst aus Koroneiki-Oliven – seit Generationen.
-          </p>
+          <p class="footer__brand-desc">Natives Olivenöl Extra aus der traditionellen Steinmühle in Thalames, Mani. Handgepresst aus Koroneiki-Oliven – seit Generationen.</p>
           <div class="footer__social">
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/MoreaOlivenoel/" target="_blank" rel="noopener" aria-label="Facebook">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/morea_oliveoil/" target="_blank" rel="noopener" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
-            <a href="#" aria-label="YouTube">
+            <a href="https://www.youtube.com/watch?v=i4jPSqI5MpM" target="_blank" rel="noopener" aria-label="YouTube">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96C1 8.12 1 12 1 12s0 3.88.46 5.58a2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95C23 15.88 23 12 23 12s0-3.88-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
             </a>
           </div>
         </div>
         <div>
-          <div class="footer__heading">Produkte</div>
+          <div class="footer__heading">Olivenöle</div>
           <ul class="footer__links">
-            <li><a href="#">Extra Vergine Olivenöl</a></li>
-            <li><a href="#">Bio Olivenöl</a></li>
-            <li><a href="#">Mildes Kochöl</a></li>
-            <li><a href="#">Aromatisierte Öle</a></li>
-            <li><a href="#">Fleur de Sel</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/kopie-von-i-m-a-product" target="_blank" rel="noopener">Extra Vergine 2,5 l</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/oliven%C3%B6l-extra-vergine-0-5l-flasche" target="_blank" rel="noopener">Extra Vergine 0,5 l</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/bio-oliven%C3%B6l-extra-vergine-2-5l-kanister" target="_blank" rel="noopener">Bio Extra Vergine 2,5 l</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/bio-oliven%C3%B6l-extra-vergine-0-5l-flasche" target="_blank" rel="noopener">Bio Extra Vergine 0,5 l</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/mildes-koch%C3%B6l-oliven%C3%B6l-extra-vergine-2-5l-kanister" target="_blank" rel="noopener">Mildes Kochöl 2,5 l</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__heading">Aromatisiert &amp; Delikatessen</div>
+          <ul class="footer__links">
+            <li><a href="https://www.moreaolivenoel.com/product-page/zitronen-oliven%C3%B6l-extra-vergine-0-25l-flasche" target="_blank" rel="noopener">Zitronen Olivenöl</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/knoblauch-oliven%C3%B6l-extra-vergine-0-25l" target="_blank" rel="noopener">Knoblauch Olivenöl</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/kalamata-oliven-in-oliven%C3%B6l-340g" target="_blank" rel="noopener">Kalamata Oliven</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/gr%C3%BCne-oliven-in-oliven%C3%B6l-340g" target="_blank" rel="noopener">Grüne Oliven</a></li>
+            <li><a href="https://www.moreaolivenoel.com/product-page/kapern-in-oliven%C3%B6l-95g" target="_blank" rel="noopener">Kapern in Olivenöl</a></li>
           </ul>
         </div>
         <div>
           <div class="footer__heading">Über Morea</div>
           <ul class="footer__links">
-            <li><a href="#">Unsere Geschichte</a></li>
-            <li><a href="#">Die Steinmühle</a></li>
-            <li><a href="#">Herstellung</a></li>
-            <li><a href="#">Qualität & Zertifikate</a></li>
-            <li><a href="#">Mühlenladen besuchen</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__heading">Service</div>
-          <ul class="footer__links">
-            <li><a href="#">Versand & Lieferung</a></li>
-            <li><a href="#">Rückgabe</a></li>
-            <li><a href="#">Kontakt</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Großhandel</a></li>
+            <li><a href="https://www.moreaolivenoel.com/home" target="_blank" rel="noopener">Unsere Geschichte</a></li>
+            <li><a href="https://www.moreaolivenoel.com/home" target="_blank" rel="noopener">Die Steinmühle</a></li>
+            <li><a href="https://www.moreaolivenoel.com/" target="_blank" rel="noopener">Online Shop</a></li>
+            <li><a href="https://www.facebook.com/MoreaOlivenoel/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.instagram.com/morea_oliveoil/" target="_blank" rel="noopener">Instagram</a></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© 2025 Morea Olivenöl · Alle Rechte vorbehalten</p>
+        <p>© 2025 Morea Olivenöl · Alle Rechte vorbehalten · <a href="https://www.moreaolivenoel.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.55)">moreaolivenoel.com</a></p>
         <div class="footer__bottom-links">
-          <a href="#">Impressum</a>
-          <a href="#">Datenschutz</a>
-          <a href="#">AGB</a>
-          <a href="#">Cookies</a>
+          <a href="https://www.moreaolivenoel.com" target="_blank" rel="noopener">Impressum</a>
+          <a href="https://www.moreaolivenoel.com" target="_blank" rel="noopener">Datenschutz</a>
+          <a href="https://www.moreaolivenoel.com" target="_blank" rel="noopener">AGB</a>
         </div>
       </div>
     </div>
@@ -1546,38 +1118,49 @@
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
+    // Mobile menu
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
     // Scroll reveal
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: .15, rootMargin: '0px 0px -48px 0px' }
+      { threshold: .12, rootMargin: '0px 0px -40px 0px' }
     );
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Tab filter (visual only)
-    document.querySelectorAll('.tab-btn').forEach(btn => {
+    // Product filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card[data-category]');
+    filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        productCards.forEach(card => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !show);
+          if (show && !card.classList.contains('visible')) {
+            setTimeout(() => card.classList.add('visible'), 50);
+          }
+        });
       });
     });
 
-    // Mobile nav toggle
-    const burger = document.getElementById('burger');
-    const navLinks = document.querySelector('.nav__links');
-    burger.addEventListener('click', () => {
-      const open = navLinks.style.display === 'flex';
-      navLinks.style.display = open ? '' : 'flex';
-      navLinks.style.flexDirection = 'column';
-      navLinks.style.position = 'absolute';
-      navLinks.style.top = '76px';
-      navLinks.style.left = '0';
-      navLinks.style.right = '0';
-      navLinks.style.background = 'var(--cream)';
-      navLinks.style.padding = '20px 7%';
-      navLinks.style.gap = '16px';
-      navLinks.style.boxShadow = '0 8px 32px rgba(0,0,0,.1)';
-      if (open) navLinks.style.display = 'none';
-    });
+    // Newsletter
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Danke! ✓';
+      btn.style.background = '#4a7a44';
+      setTimeout(() => { btn.textContent = 'Anmelden'; btn.style.background = ''; }, 3000);
+    }
   </script>
 </body>
 </html>
