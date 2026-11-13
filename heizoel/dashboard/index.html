@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heizöl-Verbrauch</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f3f0;
+  --surface: #fcfcfb;
+  --border: #e3e2dd;
+  --grid: #ecebe7;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --text-3: #7a7974;
+  --series-1: #2a78d6;
+  --series-1-soft: rgba(42,120,214,.14);
+  --series-2: #eb6834;
+  --muted-bar: #b9b8b2;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111110; --surface: #1a1a19; --border: #2e2e2c; --grid: #262624;
+    --text: #f0efec; --text-2: #c3c2b7; --text-3: #8f8e88;
+    --series-1: #3987e5; --series-1-soft: rgba(57,135,229,.18); --series-2: #d95926; --muted-bar: #4a4a47;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111110; --surface: #1a1a19; --border: #2e2e2c; --grid: #262624;
+  --text: #f0efec; --text-2: #c3c2b7; --text-3: #8f8e88;
+  --series-1: #3987e5; --series-1-soft: rgba(57,135,229,.18); --series-2: #d95926; --muted-bar: #4a4a47;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 48px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; margin-bottom: 20px; }
+h1 { font-size: 22px; margin: 0; letter-spacing: -.01em; }
+h2 { font-size: 15px; margin: 0 0 2px; }
+.sub { color: var(--text-2); font-size: 13px; margin: 0 0 12px; }
+.stand { color: var(--text-3); font-size: 13px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-width: 0; }
+.kpi .label { color: var(--text-2); font-size: 13px; }
+.kpi .wert { font-size: 30px; font-weight: 650; letter-spacing: -.02em; font-variant-numeric: tabular-nums; margin: 2px 0; }
+.kpi .wert small { font-size: 15px; font-weight: 500; color: var(--text-2); margin-left: 3px; }
+.kpi .detail { color: var(--text-3); font-size: 12.5px; }
+.meter { height: 8px; border-radius: 4px; background: var(--grid); margin-top: 8px; overflow: hidden; }
+.meter span { display: block; height: 100%; background: var(--series-1); border-radius: 4px; }
+.filter { display: flex; gap: 4px; flex-wrap: wrap; margin: 4px 0 16px; }
+.filter button { font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text-2); }
+.filter button[aria-pressed="true"] { background: var(--text); color: var(--surface); border-color: var(--text); }
+.grid2 { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 12px; }
+.chart { position: relative; height: 280px; }
+.full { margin-bottom: 12px; }
+@media (max-width: 820px) { .grid2 { grid-template-columns: 1fr; } }
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 6px 8px; white-space: nowrap; border-bottom: 1px solid var(--grid); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--text-2); font-weight: 600; }
+.ok { color: var(--text); } .schlecht { color: var(--text-3); }
+ul.hinweise { margin: 0; padding-left: 18px; font-size: 13px; color: var(--text-2); }
+.tablewrap { overflow-x: auto; }
+.legend { display: flex; gap: 14px; font-size: 12.5px; color: var(--text-2); margin-bottom: 6px; flex-wrap: wrap; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Heizöl-Verbrauch</h1>
+    <span class="stand" id="stand"></span>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <div class="filter" role="group" aria-label="Zeitraum">
+    <button data-range="hj" aria-pressed="false">Aktuelles Heizjahr</button>
+    <button data-range="12" aria-pressed="false">12 Monate</button>
+    <button data-range="36" aria-pressed="true">3 Jahre</button>
+    <button data-range="all" aria-pressed="false">Alles</button>
+  </div>
+
+  <section class="card full">
+    <h2>Tagesverbrauch</h2>
+    <p class="sub">Liter pro Tag. Bei manuellen Ablesungen ist das der Durchschnitt zwischen zwei Ablesungen, kein gemessener Einzeltag.</p>
+    <div class="chart"><canvas id="cTage" aria-label="Tagesverbrauch in Litern"></canvas></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Monatsverbrauch</h2>
+      <p class="sub">Liter pro Monat, zwischen Ablesungen linear verteilt.</p>
+      <div class="chart"><canvas id="cMonate" aria-label="Monatsverbrauch in Litern"></canvas></div>
+    </section>
+    <section class="card">
+      <h2>Verbrauch je Heizjahr</h2>
+      <p class="sub">Juli bis Juni. Graue Balken: unvollständige Jahre.</p>
+      <div class="chart"><canvas id="cJahre" aria-label="Verbrauch je Heizjahr"></canvas></div>
+    </section>
+  </div>
+
+  <section class="card full">
+    <h2>Bestand im Tank</h2>
+    <div class="legend"><span><i style="background:var(--series-1)"></i>Bestand (Liter)</span><span><i style="background:var(--series-2)"></i>Lieferung</span></div>
+    <div class="chart"><canvas id="cBestand" aria-label="Bestand in Litern"></canvas></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Kalibrierung anhand der Lieferungen</h2>
+      <p class="sub" id="kalText"></p>
+      <div class="tablewrap"><table id="kalTab"></table></div>
+    </section>
+    <section class="card">
+      <h2>Datenhinweise</h2>
+      <p class="sub">Beim Import korrigiert oder geglättet.</p>
+      <ul class="hinweise" id="hinweise"></ul>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/chart.umd.min.js"></script>
+<script src="daten.js"></script>
+<script>
+(async () => {
+  const D = window.HEIZOEL || await (await fetch('daten.json')).json();
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const fmt = (n, d = 0) => n.toLocaleString('de-DE', { maximumFractionDigits: d, minimumFractionDigits: d });
+  const dDE = iso => { const [y, m, d] = iso.split('-'); return `${d}.${m}.${y}`; };
+  const MON = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+  const mDE = ym => { const [y, m] = ym.split('-'); return `${MON[+m - 1]} ${y.slice(2)}`; };
+  const addDays = (iso, n) => { const d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+
+  // --- KPIs
+  const k = D.kpi;
+  document.getElementById('stand').textContent = `Letzte Ablesung: ${dDE(D.stand)}`;
+  const leer = k.reichweite_tage ? dDE(addDays(D.stand, k.reichweite_tage)) : null;
+  const diff = k.heizjahr_bisher - k.vorjahr_gleicher_zeitraum;
+  const pct = Math.round(k.bestand_liter / k.kapazitaet_liter * 100);
+  document.getElementById('kpis').innerHTML = `
+    <div class="card kpi"><div class="label">Bestand</div>
+      <div class="wert">${fmt(k.bestand_liter)}<small>l</small></div>
+      <div class="detail">${pct} % von ${fmt(k.kapazitaet_liter)} l · ${fmt(k.fuellstand_cm, 1)} cm</div>
+      <div class="meter"><span style="width:${pct}%"></span></div></div>
+    <div class="card kpi"><div class="label">Ø Verbrauch letzte 30 Tage</div>
+      <div class="wert">${fmt(k.verbrauch_30d_pro_tag, 1)}<small>l/Tag</small></div>
+      <div class="detail">≈ ${fmt(k.verbrauch_30d_pro_tag * 30)} l pro Monat</div></div>
+    <div class="card kpi"><div class="label">Reichweite</div>
+      <div class="wert">${k.reichweite_tage ?? '–'}<small>Tage</small></div>
+      <div class="detail">${leer ? `leer etwa am ${leer}` : ''}, gerechnet mit dem Verbrauchsprofil der Vorjahre</div></div>
+    <div class="card kpi"><div class="label">Heizjahr ${k.heizjahr} bisher</div>
+      <div class="wert">${fmt(k.heizjahr_bisher)}<small>l</small></div>
+      <div class="detail">${diff <= 0 ? '−' : '+'}${fmt(Math.abs(diff))} l gegenüber Vorjahr im gleichen Zeitraum (${fmt(k.vorjahr_gleicher_zeitraum)} l)</div></div>`;
+
+  // --- Bestand täglich interpolieren
+  const bestand = [];
+  const A = D.ablesungen;
+  for (let i = 1; i < A.length; i++) {
+    const t0 = new Date(A[i - 1].datum), t1 = new Date(A[i].datum);
+    const n = Math.round((t1 - t0) / 864e5);
+    const geliefert = D.lieferungen.some(l => l.datum === A[i].datum);
+    for (let j = i === 1 ? 0 : 1; j <= n; j++) {
+      const v = geliefert && j < n ? A[i - 1].liter : A[i - 1].liter + (A[i].liter - A[i - 1].liter) * j / n;
+      bestand.push({ datum: addDays(A[i - 1].datum, j), liter: Math.round(v) });
+    }
+  }
+
+  // --- Chart-Grundeinstellungen
+  const C = () => ({ text2: css('--text-2'), text3: css('--text-3'), grid: css('--grid'), s1: css('--series-1'),
+                     s1soft: css('--series-1-soft'), s2: css('--series-2'), muted: css('--muted-bar'), surface: css('--surface'), text: css('--text') });
+  let c = C();
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  Chart.defaults.font.size = 12;
+  const base = (yTitle) => ({
+    responsive: true, maintainAspectRatio: false, animation: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { display: false },
+      tooltip: { backgroundColor: c.surface, titleColor: c.text, bodyColor: c.text2, borderColor: c.grid, borderWidth: 1,
+                 padding: 10, displayColors: false } },
+    scales: {
+      x: { grid: { display: false }, border: { color: c.grid }, ticks: { color: c.text3, maxRotation: 0, autoSkipPadding: 16 } },
+      y: { beginAtZero: true, grid: { color: c.grid }, border: { display: false },
+           ticks: { color: c.text3, callback: v => fmt(v) }, title: { display: !!yTitle, text: yTitle, color: c.text3 } } }
+  });
+
+  const charts = {};
+  charts.tage = new Chart(document.getElementById('cTage'), { type: 'line',
+    data: { labels: [], datasets: [{ data: [], borderColor: c.s1, backgroundColor: c.s1soft, fill: true,
+      borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, stepped: true }] },
+    options: { ...base('l/Tag'), plugins: { ...base().plugins, tooltip: { ...base().plugins.tooltip,
+      callbacks: { title: i => dDE(i[0].label), label: i => `${fmt(i.raw, 1)} l/Tag` } } },
+      scales: { ...base('l/Tag').scales, x: { ...base().scales.x, ticks: { ...base().scales.x.ticks, callback(v) { return dDE(this.getLabelForValue(v)); } } } } } });
+
+  charts.monate = new Chart(document.getElementById('cMonate'), { type: 'bar',
+    data: { labels: [], datasets: [{ data: [], backgroundColor: c.s1, borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: 'bottom',
+      barPercentage: .82, categoryPercentage: 1 }] },
+    options: { ...base('Liter'), plugins: { ...base().plugins, tooltip: { ...base().plugins.tooltip,
+      callbacks: { title: i => mDE(i[0].label), label: i => `${fmt(i.raw)} l` } } },
+      scales: { ...base('Liter').scales, x: { ...base().scales.x, ticks: { ...base().scales.x.ticks, callback(v) { return mDE(this.getLabelForValue(v)); } } } } } });
+
+  const HJ = D.heizjahre;
+  charts.jahre = new Chart(document.getElementById('cJahre'), { type: 'bar',
+    data: { labels: HJ.map(h => h.heizjahr), datasets: [{ data: HJ.map(h => h.liter),
+      backgroundColor: HJ.map(h => h.tage >= 365 ? c.s1 : c.muted), borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: 'bottom', barPercentage: .7 }] },
+    options: { ...base('Liter'), scales: { ...base('Liter').scales, x: { ...base().scales.x, ticks: { ...base().scales.x.ticks, autoSkip: false, maxRotation: 45, callback(v) { return this.getLabelForValue(v).replace('/', '/\u200b'); } } } }, plugins: { ...base().plugins, tooltip: { ...base().plugins.tooltip,
+      callbacks: { label: i => { const h = HJ[i.dataIndex]; return [`${fmt(h.liter)} l`, `alte Formel: ${fmt(h.liter_alt)} l`, h.tage < 365 ? `nur ${h.tage} Tage erfasst` : '']; } } } } } });
+
+  charts.bestand = new Chart(document.getElementById('cBestand'), { type: 'line',
+    data: { labels: [], datasets: [
+      { data: [], borderColor: c.s1, borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, fill: false },
+      { data: [], showLine: false, pointRadius: 6, pointHoverRadius: 7, pointBackgroundColor: c.s2, pointBorderColor: c.surface, pointBorderWidth: 2 } ] },
+    options: { ...base('Liter'), plugins: { ...base().plugins, tooltip: { ...base().plugins.tooltip,
+      callbacks: { title: i => dDE(i[0].label), label: i => i.datasetIndex === 0 ? `Bestand ${fmt(i.raw)} l`
+        : `Lieferung ${fmt(D.lieferungen.find(l => l.datum === i.label).liter)} l` } } },
+      scales: { ...base('Liter').scales, x: { ...base().scales.x, ticks: { ...base().scales.x.ticks, callback(v) { return dDE(this.getLabelForValue(v)); } } } } } });
+
+  // --- Zeitraumfilter
+  const hjStart = `${D.kpi.heizjahr.slice(0, 4)}-07-01`;
+  function vonDatum(r) {
+    if (r === 'all') return '0000';
+    if (r === 'hj') return hjStart;
+    const d = new Date(D.stand + 'T12:00:00Z'); d.setUTCMonth(d.getUTCMonth() - +r); return d.toISOString().slice(0, 10);
+  }
+  function setRange(r) {
+    const von = vonDatum(r);
+    const t = D.tage.filter(x => x.datum >= von);
+    charts.tage.data.labels = t.map(x => x.datum); charts.tage.data.datasets[0].data = t.map(x => x.liter);
+    const m = D.monate.filter(x => x.monat >= von.slice(0, 7));
+    charts.monate.data.labels = m.map(x => x.monat); charts.monate.data.datasets[0].data = m.map(x => x.liter);
+    const b = bestand.filter(x => x.datum >= von);
+    charts.bestand.data.labels = b.map(x => x.datum); charts.bestand.data.datasets[0].data = b.map(x => x.liter);
+    const lief = new Set(D.lieferungen.map(l => l.datum));
+    charts.bestand.data.datasets[1].data = b.map(x => lief.has(x.datum) ? x.liter : null);
+    Object.values(charts).forEach(ch => ch.update());
+    document.querySelectorAll('.filter button').forEach(btn => btn.setAttribute('aria-pressed', btn.dataset.range === r));
+    try { localStorage.setItem('heizoel-range', r); } catch (e) {}
+  }
+  document.querySelectorAll('.filter button').forEach(b => b.addEventListener('click', () => setRange(b.dataset.range)));
+  let start = '36'; try { start = localStorage.getItem('heizoel-range') || '36'; } catch (e) {}
+  setRange(start);
+
+  // --- Kalibrierung & Hinweise
+  const K = D.kalibrierung;
+  document.getElementById('kalText').innerHTML =
+    `Neu: <b>${fmt(K.liter_pro_cm, 2)} l/cm</b> (bisher ${fmt(K.alt_liter_pro_cm, 2)} l/cm). Bezugspunkt: 146 cm = 4.000 l.`;
+  document.getElementById('kalTab').innerHTML = `<thead><tr><th>Lieferung</th><th>Δ cm</th><th>Lieferschein</th><th>neu</th><th>bisher</th></tr></thead><tbody>` +
+    K.lieferungen.map(p => `<tr><td>${dDE(p.datum)}</td><td>${fmt(p.delta_cm, 1)}</td><td>${fmt(p.liter)} l</td>
+      <td class="ok">${fmt(p.liter_neu)} l</td><td class="schlecht">${fmt(p.liter_alt)} l</td></tr>`).join('') + '</tbody>';
+  document.getElementById('hinweise').innerHTML = D.hinweise.map(h => `<li><b>${dDE(h.datum)}</b>: ${h.text}</li>`).join('');
+
+  // --- Theme-Wechsel: Farben neu lesen
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => location.reload());
+})();
+</script>
+</body>
+</html>
