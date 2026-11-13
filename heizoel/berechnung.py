@@ -176,6 +176,7 @@ def main() -> None:
             "verbrauch_30d_pro_tag": round(letzte30, 1),
             "reichweite_tage": reichweite(tage, heute, bestand, cfg["mindestbestand_liter"]),
             "heizjahr": hj_jetzt,
+            "heizjahr_beginn": hj_start.isoformat(),
             "heizjahr_bisher": round(bisher),
             "vorjahr_gleicher_zeitraum": round(vorjahr),
         },

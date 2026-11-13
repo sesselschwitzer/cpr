@@ -55,8 +55,9 @@ window.HEIZOEL = {
   "verbrauch_30d_pro_tag": 6.2,
   "reichweite_tage": 352,
   "heizjahr": "2026/27",
+  "heizjahr_beginn": "2026-09-01",
   "heizjahr_bisher": 191,
-  "vorjahr_gleicher_zeitraum": 226
+  "vorjahr_gleicher_zeitraum": 223
  },
  "ablesungen": [
   {
@@ -9267,45 +9268,45 @@ window.HEIZOEL = {
  "heizjahre": [
   {
    "heizjahr": "2020/21",
-   "liter": 140,
-   "liter_alt": 410,
-   "tage": 59
+   "liter": 289,
+   "liter_alt": 547,
+   "tage": 121
   },
   {
    "heizjahr": "2021/22",
-   "liter": 1870,
-   "liter_alt": 1800,
+   "liter": 1744,
+   "liter_alt": 1684,
    "tage": 365
   },
   {
    "heizjahr": "2022/23",
-   "liter": 1814,
-   "liter_alt": 1861,
+   "liter": 1856,
+   "liter_alt": 1900,
    "tage": 365
   },
   {
    "heizjahr": "2023/24",
-   "liter": 1991,
-   "liter_alt": 1830,
+   "liter": 1986,
+   "liter_alt": 1978,
    "tage": 366
   },
   {
    "heizjahr": "2024/25",
-   "liter": 2235,
-   "liter_alt": 2218,
+   "liter": 2178,
+   "liter_alt": 2204,
    "tage": 365
   },
   {
    "heizjahr": "2025/26",
-   "liter": 1815,
-   "liter_alt": 1860,
+   "liter": 1812,
+   "liter_alt": 1665,
    "tage": 365
   },
   {
    "heizjahr": "2026/27",
    "liter": 191,
    "liter_alt": 176,
-   "tage": 136
+   "tage": 74
   }
  ],
  "hinweise": [

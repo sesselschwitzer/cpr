@@ -99,7 +99,7 @@ ul.hinweise { margin: 0; padding-left: 18px; font-size: 13px; color: var(--text-
     </section>
     <section class="card">
       <h2>Verbrauch je Heizjahr</h2>
-      <p class="sub">Juli bis Juni. Graue Balken: unvollständige Jahre.</p>
+      <p class="sub">September bis August. Graue Balken: unvollständige Jahre.</p>
       <div class="chart"><canvas id="cJahre" aria-label="Verbrauch je Heizjahr"></canvas></div>
     </section>
   </div>
@@ -220,7 +220,7 @@ ul.hinweise { margin: 0; padding-left: 18px; font-size: 13px; color: var(--text-
       scales: { ...base('Liter').scales, x: { ...base().scales.x, ticks: { ...base().scales.x.ticks, callback(v) { return dDE(this.getLabelForValue(v)); } } } } } });
 
   // --- Zeitraumfilter
-  const hjStart = `${D.kpi.heizjahr.slice(0, 4)}-07-01`;
+  const hjStart = D.kpi.heizjahr_beginn;
   function vonDatum(r) {
     if (r === 'all') return '0000';
     if (r === 'hj') return hjStart;
