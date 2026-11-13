@@ -1,0 +1,5 @@
+.env
+daten/
+dashboard/daten.js
+dashboard/daten.json
+__pycache__/

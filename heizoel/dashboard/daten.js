@@ -1,52 +1,41 @@
 window.HEIZOEL = {
  "stand": "2026-11-13",
+ "quelle_letzte": "manuell",
  "kalibrierung": {
   "liter_pro_cm": 28.702960679140094,
-  "liter_pro_cm_fit": 28.702960679140094,
   "offset": -190.632259154454,
   "lieferungen": [
    {
     "datum": "2021-05-03",
     "liter": 3500.0,
     "delta_cm": 122.0,
-    "tage_luecke": 1,
-    "liter_neu": 3502,
-    "liter_alt": 3218
+    "liter_berechnet": 3502
    },
    {
     "datum": "2022-06-20",
     "liter": 1000.0,
     "delta_cm": 34.5,
-    "tage_luecke": 1,
-    "liter_neu": 990,
-    "liter_alt": 910
+    "liter_berechnet": 990
    },
    {
     "datum": "2023-03-14",
     "liter": 2400.0,
     "delta_cm": 83.5,
-    "tage_luecke": 1,
-    "liter_neu": 2397,
-    "liter_alt": 2203
+    "liter_berechnet": 2397
    },
    {
     "datum": "2024-08-05",
     "liter": 2000.0,
     "delta_cm": 70.0,
-    "tage_luecke": 8,
-    "liter_neu": 2009,
-    "liter_alt": 1846
+    "liter_berechnet": 2009
    },
    {
     "datum": "2025-08-26",
     "liter": 2500.0,
     "delta_cm": 87.0,
-    "tage_luecke": 60,
-    "liter_neu": 2497,
-    "liter_alt": 2295
+    "liter_berechnet": 2497
    }
-  ],
-  "alt_liter_pro_cm": 26.378
+  ]
  },
  "kpi": {
   "bestand_liter": 1853,
@@ -65,826 +54,826 @@ window.HEIZOEL = {
    "cm": 24.0,
    "cm_glatt": 24.0,
    "liter": 498,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-05-03",
    "cm": 146.0,
    "cm_glatt": 146.0,
    "liter": 4000,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-09-29",
    "cm": 133.5,
    "cm_glatt": 133.5,
    "liter": 3641,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-10-21",
    "cm": 130.5,
    "cm_glatt": 130.5,
    "liter": 3555,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-11-10",
    "cm": 126.0,
    "cm_glatt": 126.0,
    "liter": 3426,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-11-23",
    "cm": 122.0,
    "cm_glatt": 122.0,
    "liter": 3311,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-12-07",
    "cm": 118.0,
    "cm_glatt": 118.0,
    "liter": 3196,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-12-14",
    "cm": 115.5,
    "cm_glatt": 115.5,
    "liter": 3125,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-12-21",
    "cm": 113.0,
    "cm_glatt": 113.0,
    "liter": 3053,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2021-12-24",
    "cm": 111.0,
    "cm_glatt": 111.0,
    "liter": 2995,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-01-05",
    "cm": 109.0,
    "cm_glatt": 109.0,
    "liter": 2938,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-01-09",
    "cm": 107.0,
    "cm_glatt": 107.0,
    "liter": 2881,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-01-29",
    "cm": 99.5,
    "cm_glatt": 99.5,
    "liter": 2665,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-02-27",
    "cm": 89.0,
    "cm_glatt": 89.0,
    "liter": 2364,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-03-07",
    "cm": 86.0,
    "cm_glatt": 86.0,
    "liter": 2278,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-03-12",
    "cm": 84.0,
    "cm_glatt": 84.0,
    "liter": 2220,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-03-31",
    "cm": 81.0,
    "cm_glatt": 81.0,
    "liter": 2134,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-04-15",
    "cm": 79.0,
    "cm_glatt": 79.0,
    "liter": 2077,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-05-01",
    "cm": 78.0,
    "cm_glatt": 78.0,
    "liter": 2048,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-06-04",
    "cm": 77.0,
    "cm_glatt": 77.0,
    "liter": 2019,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-06-19",
    "cm": 76.5,
    "cm_glatt": 76.5,
    "liter": 2005,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-06-20",
    "cm": 111.0,
    "cm_glatt": 111.0,
    "liter": 2995,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-08-14",
    "cm": 110.0,
    "cm_glatt": 110.0,
    "liter": 2967,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-09-08",
    "cm": 110.0,
    "cm_glatt": 110.0,
    "liter": 2967,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-10-01",
    "cm": 109.0,
    "cm_glatt": 109.0,
    "liter": 2938,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-10-10",
    "cm": 107.5,
    "cm_glatt": 107.5,
    "liter": 2895,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-11-01",
    "cm": 107.0,
    "cm_glatt": 107.0,
    "liter": 2881,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-11-20",
    "cm": 104.0,
    "cm_glatt": 104.0,
    "liter": 2794,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-12-03",
    "cm": 100.0,
    "cm_glatt": 100.0,
    "liter": 2680,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-12-15",
    "cm": 95.5,
    "cm_glatt": 95.5,
    "liter": 2551,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2022-12-27",
    "cm": 91.0,
    "cm_glatt": 91.0,
    "liter": 2421,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-01-01",
    "cm": 89.5,
    "cm_glatt": 89.5,
    "liter": 2378,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-01-07",
    "cm": 88.0,
    "cm_glatt": 88.0,
    "liter": 2335,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-01-26",
    "cm": 80.0,
    "cm_glatt": 80.0,
    "liter": 2106,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-02-06",
    "cm": 74.0,
    "cm_glatt": 74.0,
    "liter": 1933,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-02-10",
    "cm": 72.0,
    "cm_glatt": 72.0,
    "liter": 1876,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-02-17",
    "cm": 69.0,
    "cm_glatt": 69.0,
    "liter": 1790,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-02-24",
    "cm": 67.0,
    "cm_glatt": 67.0,
    "liter": 1732,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-03-06",
    "cm": 63.0,
    "cm_glatt": 63.0,
    "liter": 1618,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-03-13",
    "cm": 60.5,
    "cm_glatt": 60.5,
    "liter": 1546,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-03-14",
    "cm": 144.0,
    "cm_glatt": 144.0,
    "liter": 3943,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-04-14",
    "cm": 137.0,
    "cm_glatt": 137.0,
    "liter": 3742,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-04-26",
    "cm": 134.5,
    "cm_glatt": 134.5,
    "liter": 3670,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-05-13",
    "cm": 133.0,
    "cm_glatt": 133.0,
    "liter": 3627,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-08-03",
    "cm": 130.0,
    "cm_glatt": 130.0,
    "liter": 3541,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-08-30",
    "cm": 129.0,
    "cm_glatt": 129.0,
    "liter": 3512,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-09-15",
    "cm": 128.5,
    "cm_glatt": 128.5,
    "liter": 3498,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-10-09",
    "cm": 128.0,
    "cm_glatt": 128.0,
    "liter": 3483,
-   "notiz": "Heizung an"
+   "quelle": "manuell"
   },
   {
    "datum": "2023-11-06",
    "cm": 123.0,
    "cm_glatt": 123.0,
    "liter": 3340,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-11-29",
    "cm": 117.5,
    "cm_glatt": 117.5,
    "liter": 3182,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2023-12-31",
    "cm": 106.0,
    "cm_glatt": 106.0,
    "liter": 2852,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-01-18",
    "cm": 97.5,
    "cm_glatt": 97.5,
    "liter": 2608,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-02-02",
    "cm": 91.5,
    "cm_glatt": 91.5,
    "liter": 2436,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-03-05",
    "cm": 81.0,
    "cm_glatt": 81.0,
    "liter": 2134,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-03-21",
    "cm": 77.0,
    "cm_glatt": 77.0,
    "liter": 2019,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-03-30",
    "cm": 74.0,
    "cm_glatt": 74.0,
    "liter": 1933,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-04-11",
    "cm": 71.5,
    "cm_glatt": 71.5,
    "liter": 1862,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-04-27",
    "cm": 67.0,
    "cm_glatt": 67.0,
    "liter": 1732,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-05-29",
    "cm": 64.0,
    "cm_glatt": 64.0,
    "liter": 1646,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-06-26",
    "cm": 62.0,
    "cm_glatt": 62.0,
    "liter": 1589,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-07-28",
    "cm": 61.0,
    "cm_glatt": 61.0,
    "liter": 1560,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-08-05",
    "cm": 131.0,
    "cm_glatt": 131.0,
    "liter": 3569,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-09-17",
    "cm": 129.0,
    "cm_glatt": 129.0,
    "liter": 3512,
-   "notiz": "Heizung an"
+   "quelle": "manuell"
   },
   {
    "datum": "2024-11-16",
    "cm": 119.0,
    "cm_glatt": 119.0,
    "liter": 3225,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-12-02",
    "cm": 113.0,
    "cm_glatt": 113.0,
    "liter": 3053,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2024-12-30",
    "cm": 102.0,
    "cm_glatt": 102.0,
    "liter": 2737,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-01-31",
    "cm": 87.5,
    "cm_glatt": 87.5,
    "liter": 2321,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-02-09",
    "cm": 83.0,
    "cm_glatt": 83.0,
    "liter": 2192,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-03-06",
    "cm": 70.0,
    "cm_glatt": 70.0,
    "liter": 1819,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-03-30",
    "cm": 63.0,
    "cm_glatt": 63.0,
    "liter": 1618,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-04-24",
    "cm": 58.0,
    "cm_glatt": 58.0,
    "liter": 1474,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-05-10",
    "cm": 56.0,
    "cm_glatt": 56.0,
    "liter": 1417,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-06-27",
    "cm": 54.0,
    "cm_glatt": 54.0,
    "liter": 1359,
-   "notiz": "Heizung aus, BWWP an"
+   "quelle": "manuell"
   },
   {
    "datum": "2025-08-26",
    "cm": 141.0,
    "cm_glatt": 141.0,
    "liter": 3856,
-   "notiz": "Original \"141,143\" - korrigiert auf 141 (passt zu 3696 l)"
+   "quelle": "manuell"
   },
   {
    "datum": "2025-09-22",
    "cm": 141.0,
    "cm_glatt": 141.0,
    "liter": 3856,
-   "notiz": "Heizung an"
+   "quelle": "manuell"
   },
   {
    "datum": "2025-10-24",
    "cm": 137.5,
    "cm_glatt": 137.5,
    "liter": 3756,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-10-30",
    "cm": 136.5,
    "cm_glatt": 136.5,
    "liter": 3727,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-11-05",
    "cm": 135.0,
    "cm_glatt": 135.0,
    "liter": 3684,
-   "notiz": "US-Wert passt nicht zum Füllstand (vermutl. kopiert)"
+   "quelle": "manuell"
   },
   {
    "datum": "2025-11-07",
    "cm": 134.5,
    "cm_glatt": 134.5,
    "liter": 3670,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-11-12",
    "cm": 133.5,
    "cm_glatt": 133.5,
    "liter": 3641,
-   "notiz": "US-Wert passt nicht zum Füllstand (vermutl. kopiert)"
+   "quelle": "manuell"
   },
   {
    "datum": "2025-11-16",
    "cm": 132.4,
    "cm_glatt": 132.4,
    "liter": 3610,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-11-20",
    "cm": 131.2,
    "cm_glatt": 131.2,
    "liter": 3575,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-11-24",
    "cm": 129.0,
    "cm_glatt": 129.0,
    "liter": 3512,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-12-02",
    "cm": 126.9,
    "cm_glatt": 126.9,
    "liter": 3452,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-12-07",
    "cm": 124.8,
    "cm_glatt": 124.8,
    "liter": 3391,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-12-16",
    "cm": 122.8,
    "cm_glatt": 122.8,
    "liter": 3334,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-12-21",
    "cm": 120.7,
    "cm_glatt": 120.7,
    "liter": 3274,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-12-25",
    "cm": 118.6,
    "cm_glatt": 118.6,
    "liter": 3214,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2025-12-30",
    "cm": 116.5,
    "cm_glatt": 116.5,
    "liter": 3153,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-01-04",
    "cm": 114.3,
    "cm_glatt": 114.3,
    "liter": 3090,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-01-08",
    "cm": 112.3,
    "cm_glatt": 112.3,
    "liter": 3033,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-01-11",
    "cm": 110.9,
    "cm_glatt": 110.9,
    "liter": 2993,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-01-16",
    "cm": 108.8,
    "cm_glatt": 108.8,
    "liter": 2932,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-01-21",
    "cm": 106.7,
    "cm_glatt": 106.7,
    "liter": 2872,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-01-25",
    "cm": 104.6,
    "cm_glatt": 104.6,
    "liter": 2812,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-01-30",
    "cm": 102.5,
    "cm_glatt": 102.5,
    "liter": 2751,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-02-04",
    "cm": 100.2,
    "cm_glatt": 100.2,
    "liter": 2685,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-02-07",
    "cm": 98.3,
    "cm_glatt": 98.3,
    "liter": 2631,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-02-15",
    "cm": 96.2,
    "cm_glatt": 96.2,
    "liter": 2571,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-02-19",
    "cm": 94.1,
    "cm_glatt": 94.1,
    "liter": 2510,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-02-26",
    "cm": 92.0,
    "cm_glatt": 92.0,
    "liter": 2450,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-03-07",
    "cm": 89.9,
    "cm_glatt": 89.9,
    "liter": 2390,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-03-16",
    "cm": 87.8,
    "cm_glatt": 87.8,
    "liter": 2329,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-03-23",
    "cm": 85.7,
    "cm_glatt": 85.7,
    "liter": 2269,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-03-30",
    "cm": 83.6,
    "cm_glatt": 83.6,
    "liter": 2209,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-04-08",
    "cm": 80.2,
    "cm_glatt": 80.2,
    "liter": 2111,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-04-09",
    "cm": 79.7,
    "cm_glatt": 79.7,
    "liter": 2097,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-04-14",
    "cm": 79.2,
    "cm_glatt": 79.2,
    "liter": 2083,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-04-18",
    "cm": 78.7,
    "cm_glatt": 78.7,
    "liter": 2068,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-04-23",
    "cm": 78.2,
    "cm_glatt": 78.2,
    "liter": 2054,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-04-28",
    "cm": 77.7,
    "cm_glatt": 77.87,
    "liter": 2044,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-05-01",
    "cm": 77.7,
    "cm_glatt": 77.87,
    "liter": 2044,
-   "notiz": "Heizung aus"
+   "quelle": "manuell"
   },
   {
    "datum": "2026-10-10",
    "cm": 78.2,
    "cm_glatt": 77.87,
    "liter": 2044,
-   "notiz": "Heizung an"
+   "quelle": "manuell"
   },
   {
    "datum": "2026-10-17",
    "cm": 77.5,
    "cm_glatt": 77.5,
    "liter": 2034,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-10-24",
    "cm": 76.5,
    "cm_glatt": 76.5,
    "liter": 2005,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-10-31",
    "cm": 75.2,
    "cm_glatt": 75.2,
    "liter": 1968,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-11-06",
    "cm": 73.6,
    "cm_glatt": 73.6,
    "liter": 1922,
-   "notiz": ""
+   "quelle": "manuell"
   },
   {
    "datum": "2026-11-13",
    "cm": 71.2,
    "cm_glatt": 71.2,
    "liter": 1853,
-   "notiz": ""
+   "quelle": "manuell"
   }
  ],
  "lieferungen": [
@@ -9269,50 +9258,43 @@ window.HEIZOEL = {
   {
    "heizjahr": "2020/21",
    "liter": 289,
-   "liter_alt": 547,
    "tage": 121
   },
   {
    "heizjahr": "2021/22",
    "liter": 1744,
-   "liter_alt": 1684,
    "tage": 365
   },
   {
    "heizjahr": "2022/23",
    "liter": 1856,
-   "liter_alt": 1900,
    "tage": 365
   },
   {
    "heizjahr": "2023/24",
    "liter": 1986,
-   "liter_alt": 1978,
    "tage": 366
   },
   {
    "heizjahr": "2024/25",
    "liter": 2178,
-   "liter_alt": 2204,
    "tage": 365
   },
   {
    "heizjahr": "2025/26",
    "liter": 1812,
-   "liter_alt": 1665,
    "tage": 365
   },
   {
    "heizjahr": "2026/27",
    "liter": 191,
-   "liter_alt": 176,
    "tage": 74
   }
  ],
  "hinweise": [
   {
    "datum": "2025-08-26",
-   "text": "Original \"141,143\" - korrigiert auf 141 (passt zu 3696 l)"
+   "text": "Original \"141,143\" - korrigiert auf 141"
   },
   {
    "datum": "2025-11-05",
@@ -9324,7 +9306,7 @@ window.HEIZOEL = {
   },
   {
    "datum": "2026-10-10",
-   "text": "Füllstand 78.2 cm geglättet auf 77.9 cm (Anstieg ohne Lieferung = Messrauschen)"
+   "text": "Füllstand 78,2 cm geglättet auf 77,9 cm (Anstieg ohne Lieferung = Messrauschen)"
   }
  ]
 };
