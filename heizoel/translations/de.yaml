@@ -1,0 +1,10 @@
+configuration:
+  shelly_host:
+    name: Shelly-Adresse
+    description: IP-Adresse des Shelly, an dem der BLU Distance angelegt ist (z. B. 192.168.178.27).
+  shelly_passwort:
+    name: Shelly-Passwort
+    description: Nur ausfüllen, wenn der Shelly mit einem Passwort geschützt ist.
+  abfrage_minuten:
+    name: Abfrage-Intervall (Minuten)
+    description: Wie oft der Sensorwert geholt wird. Pro Tag zählt der Median aller Werte.

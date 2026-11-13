@@ -1,8 +1,8 @@
-"""Sensorwerte des Shelly BLU Distance aus Home Assistant holen und in SQLite speichern.
+"""Distanzwert des Shelly BLU Distance direkt vom Shelly-Gateway holen und in SQLite speichern.
 
-Holt den Verlauf seit dem letzten gespeicherten Wert (Home Assistant hält ihn
-standardmäßig 10 Tage vor), so dass kurze Ausfälle des Containers keine Lücken
-erzeugen. Werte werden in cm gespeichert.
+Der BLU Distance ist im Shelly (Gen2+) als BTHome-Gerät angelegt. Der Shelly stellt
+seine Messwerte als Komponenten `bthomesensor:<id>` bereit. Den Distanzsensor erkennen
+wir am BTHome-Objekttyp (0x40 = Distanz in mm, 0x41 = Distanz in 0,1 m).
 """
 
 from __future__ import annotations
@@ -11,14 +11,13 @@ import json
 import os
 import sqlite3
 import statistics
-import urllib.parse
 import urllib.request
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-ZEITZONE = ZoneInfo(os.environ.get("TZ", "Europe/Berlin"))
-FAKTOR_CM = {"mm": 0.1, "cm": 1.0, "m": 100.0}
+ZEITZONE = ZoneInfo(os.environ.get("TZ") or "Europe/Berlin")
+OBJ_DISTANZ = {64: 0.1, 65: 10.0}  # BTHome-Objekt-ID -> Faktor nach cm
 
 
 def oeffne(db: Path) -> sqlite3.Connection:
@@ -27,42 +26,50 @@ def oeffne(db: Path) -> sqlite3.Connection:
     return con
 
 
-def _get(url: str, token: str):
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"})
-    with urllib.request.urlopen(req, timeout=30) as r:
+def _rpc(host: str, methode: str, passwort: str = "", **params):
+    url = f"http://{host}/rpc/{methode}"
+    if params:
+        url += "?" + "&".join(f"{k}={v}" for k, v in params.items())
+    oeffner = urllib.request.build_opener()
+    if passwort:
+        pm = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+        pm.add_password(None, f"http://{host}/", "admin", passwort)
+        oeffner = urllib.request.build_opener(urllib.request.HTTPDigestAuthHandler(pm))
+    with oeffner.open(url, timeout=20) as r:
         return json.load(r)
 
 
-def hole(db: Path, ha_url: str, token: str, entity: str) -> int:
-    """Neue Werte abholen. Gibt die Anzahl neu gespeicherter Werte zurück."""
-    ha_url = ha_url.rstrip("/")
-    zustand = _get(f"{ha_url}/api/states/{entity}", token)
-    einheit = zustand.get("attributes", {}).get("unit_of_measurement", "cm")
-    if einheit not in FAKTOR_CM:
-        raise ValueError(f"Unbekannte Einheit '{einheit}' bei {entity}")
-    faktor = FAKTOR_CM[einheit]
+def finde_distanzsensor(host: str, passwort: str = "") -> tuple[int, float]:
+    """Sucht die bthomesensor-Komponente mit Distanz. Gibt (id, Faktor nach cm) zurück."""
+    offset, komponenten = 0, []
+    while True:
+        antwort = _rpc(host, "Shelly.GetComponents", passwort, dynamic_only="true", offset=offset)
+        komponenten += antwort.get("components", [])
+        offset = len(komponenten)
+        if offset >= antwort.get("total", offset):
+            break
+    for k in komponenten:
+        cfg = k.get("config", {})
+        if k.get("key", "").startswith("bthomesensor:") and cfg.get("obj_id") in OBJ_DISTANZ:
+            return cfg["id"], OBJ_DISTANZ[cfg["obj_id"]]
+    raise LookupError(f"Kein BTHome-Distanzsensor auf {host} gefunden. Ist der BLU Distance im Shelly unter Komponenten angelegt?")
 
+
+def hole(db: Path, host: str, passwort: str = "", sensor_id: int | None = None, faktor: float = 0.1) -> tuple[float, int]:
+    """Aktuellen Wert abholen und speichern. Gibt (Abstand cm, Sensor-ID) zurück."""
+    if sensor_id is None:
+        sensor_id, faktor = finde_distanzsensor(host, passwort)
+    status = _rpc(host, "BTHomeSensor.GetStatus", passwort, id=sensor_id)
+    if status.get("value") is None:
+        raise ValueError(f"Sensor {sensor_id} liefert keinen Wert: {status}")
+    cm = float(status["value"]) * faktor
+    ts = status.get("last_updated_ts") or datetime.now(timezone.utc).timestamp()
+    zeit = datetime.fromtimestamp(ts, timezone.utc).isoformat(timespec="seconds")
     con = oeffne(db)
-    letzte = con.execute("SELECT max(zeit) FROM messwerte").fetchone()[0]
-    start = datetime.fromisoformat(letzte) if letzte else datetime.now(timezone.utc) - timedelta(days=10)
-    url = (f"{ha_url}/api/history/period/{urllib.parse.quote(start.isoformat())}"
-           f"?filter_entity_id={entity}&minimal_response&no_attributes")
-    verlauf = _get(url, token)
-    eintraege = [(e["last_changed"], e["state"]) for e in (verlauf[0] if verlauf else [])]
-    # aktueller Zustand zusätzlich, damit auch Tage ohne Änderung einen Wert haben
-    eintraege.append((datetime.now(timezone.utc).isoformat(timespec="seconds"), zustand["state"]))
-
-    neu = 0
-    for zeit, wert in eintraege:
-        try:
-            cm = float(wert) * faktor
-        except (TypeError, ValueError):
-            continue  # unavailable / unknown
-        zeit = datetime.fromisoformat(zeit).astimezone(timezone.utc).isoformat(timespec="seconds")
-        neu += con.execute("INSERT OR IGNORE INTO messwerte VALUES (?, ?)", (zeit, cm)).rowcount
+    con.execute("INSERT OR IGNORE INTO messwerte VALUES (?, ?)", (zeit, cm))
     con.commit()
     con.close()
-    return neu
+    return cm, sensor_id
 
 
 def tagesmediane(db: Path) -> list[tuple[date, float]]:

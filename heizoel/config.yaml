@@ -1,0 +1,25 @@
+name: Heizöl-Dashboard
+version: "1.0.0"
+slug: heizoel
+description: Füllstand, Tages- und Monatsverbrauch der Öltanks (Shelly BLU Distance)
+url: https://github.com/sesselschwitzer/cpr/tree/claude/wizardly-bell-78o3lz/heizoel
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+ingress: true
+ingress_port: 8080
+panel_icon: mdi:oil
+panel_title: Heizöl
+map:
+  - addon_config:rw
+options:
+  shelly_host: "192.168.178.27"
+  shelly_passwort: ""
+  abfrage_minuten: 10
+schema:
+  shelly_host: str
+  shelly_passwort: password?
+  abfrage_minuten: int(1,1440)

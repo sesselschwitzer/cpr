@@ -5,3 +5,5 @@
 - Füllstand cm = 157,9 − Ultraschallwert cm. US-Sensor (Shelly BLU Distance) erst ab 30.10.2025.
 - Tageswerte aus manuellen Ablesungen sind Intervall-Durchschnitte; so im Dashboard kennzeichnen.
 - Kein externes Netz im Dashboard (Chart.js liegt in `dashboard/vendor/`).
+- Läuft als lokales Add-on in Home Assistant OS (VM auf der Synology), nicht als Container auf der Synology.
+- Sensorquelle: direkt der Shelly 1PM Gen4 (192.168.178.27) per RPC, nicht Home Assistant – die Shelly-Integration reicht den BTHome-Sensor dort nicht weiter.
